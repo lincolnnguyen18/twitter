@@ -20,7 +20,8 @@ The following **bonus** features are implemented:
 - [X] User can load past tweets infinitely. (2pts)
 
 ## Video Walkthrough
-Required functionality.
+Required functionality.  
 <img src='http://g.recordit.co/CIen5uRjVJ.gif'/>
+
 Pull to refresh.  
 <img src='http://g.recordit.co/esf2DLfF6t.gif'/>
