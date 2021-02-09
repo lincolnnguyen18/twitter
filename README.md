@@ -1,4 +1,4 @@
-# Project 3 - *Name of App Here*
+# Project 3 - *Twitter*
 
 **Name of your app** is a basic twitter app to read your tweets.
 
@@ -22,5 +22,5 @@ The following **bonus** features are implemented:
 ## Video Walkthrough
 Required functionality.
 <img src='http://g.recordit.co/CIen5uRjVJ.gif'/>
-Pull to refresh.
+Pull to refresh.  
 <img src='http://g.recordit.co/esf2DLfF6t.gif'/>
