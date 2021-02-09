@@ -22,7 +22,7 @@ The following **bonus** features are implemented:
 ## Video Walkthrough
 Required functionality.  
 <img src='http://g.recordit.co/CIen5uRjVJ.gif'/>  
+Pull to refresh.  
+<img src='http://g.recordit.co/MJHCF3P7Af.gif'/>  
 Load past tweets.  
-<img src='http://g.recordit.co/esf2DLfF6t.gif'/>  
-Load past tweets. 
 <img src='http://g.recordit.co/esf2DLfF6t.gif'/>
