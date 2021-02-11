@@ -31,7 +31,7 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate {
         numberofTweets = 10
         super.viewDidLoad()
         // disable temporarily ************************************************************************************************
-        // loadTweets()
+        loadTweets()
         // self.isModalInPresentation = true
         // self.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
         
@@ -59,8 +59,9 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate {
     
     @objc func loadTweets() {
         let myUrl = "https://api.twitter.com/1.1/statuses/home_timeline.json"
-        let myParams: [String:Any] = ["count": numberofTweets!]
+        let myParams: [String:Any] = ["count": numberofTweets!, "include_entities": "true"]
         TwitterAPICaller.client?.getDictionariesRequest(url: myUrl, parameters: myParams, success: { (tweets: [NSDictionary]) in
+            print(tweets)
             self.tweetArray.removeAll()
             for tweet in tweets {
                 self.tweetArray.append(tweet)
