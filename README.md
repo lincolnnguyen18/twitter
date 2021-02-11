@@ -26,3 +26,6 @@ Pull to refresh.
 <img src='http://g.recordit.co/MJHCF3P7Af.gif'/>  
 Load past tweets.  
 <img src='http://g.recordit.co/esf2DLfF6t.gif'/>
+
+
+<img src='http://g.recordit.co/XMaI91cAIp.gif' />
