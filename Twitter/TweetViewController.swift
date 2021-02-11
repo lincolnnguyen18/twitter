@@ -12,14 +12,24 @@ protocol TweetVCDelegate: class {
     func refreshTweets()
 }
 
-class TweetViewController: UIViewController {
+class TweetViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var tweetTextView: UITextView!
+    @IBOutlet weak var charCountLabel: UILabel!
     weak var delegate: TweetVCDelegate?
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let charLimit = 280
+        let newText = NSString(string: textView.text!).replacingCharacters(in: range, with: text)
+        print(280 - newText.count)
+        charCountLabel.text = "\(280 - newText.count) characters remaining"
+        return newText.count < charLimit
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tweetTextView.becomeFirstResponder()
+        tweetTextView.delegate = self
     }
     
     @IBAction func cancel(_ sender: Any) {

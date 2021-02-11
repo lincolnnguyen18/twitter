@@ -22,14 +22,16 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate {
     }
     
     func refreshTweets() {
-        loadTweets()
+        // disable temporarily ************************************************************************************************
+        // loadTweets()
         print("refresshhhhhahhhhhhh")
     }
     
     override func viewDidLoad() {
         numberofTweets = 10
         super.viewDidLoad()
-        loadTweets()
+        // disable temporarily ************************************************************************************************
+        // loadTweets()
         // self.isModalInPresentation = true
         // self.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
         
@@ -87,7 +89,8 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row + 1 == tweetArray.count {
-            loadMoreTweets()
+            // disable temporarily ************************************************************************************************
+            // loadMoreTweets()
         }
     }
     
