@@ -8,16 +8,28 @@
 
 import UIKit
 
-class HomeTableViewController: UITableViewController {
+class HomeTableViewController: UITableViewController, TweetVCDelegate {
 
     var tweetArray = [NSDictionary]()
     var numberofTweets: Int!
     
     let myRefreshControl = UIRefreshControl()
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let nav = segue.destination as? UINavigationController, let tweetVC = nav.topViewController as? TweetViewController {
+            tweetVC.delegate = self
+        }
+    }
+    
+    func refreshTweets() {
+        loadTweets()
+        print("refresshhhhhahhhhhhh")
+    }
+    
     override func viewDidLoad() {
+        numberofTweets = 10
         super.viewDidLoad()
-        // loadTweets()
+        loadTweets()
         // self.isModalInPresentation = true
         // self.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
         
@@ -34,16 +46,18 @@ class HomeTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.loadTweets()
-    }
+    // override func viewDidAppear(_ animated: Bool) {
+    //     super.viewDidAppear(animated)
+    //     numberofTweets = 10
+    //     DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+    //         print("TIME DOVER!")
+    //     }
+    //     // print("WHY NOT WORKING!?!?!?")
+    // }
     
     @objc func loadTweets() {
-        numberofTweets = 10
-        
         let myUrl = "https://api.twitter.com/1.1/statuses/home_timeline.json"
-        let myParams = ["count": numberofTweets]
+        let myParams: [String:Any] = ["count": numberofTweets!]
         TwitterAPICaller.client?.getDictionariesRequest(url: myUrl, parameters: myParams, success: { (tweets: [NSDictionary]) in
             self.tweetArray.removeAll()
             for tweet in tweets {

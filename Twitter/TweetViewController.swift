@@ -8,8 +8,13 @@
 
 import UIKit
 
+protocol TweetVCDelegate: class {
+    func refreshTweets()
+}
+
 class TweetViewController: UIViewController {
     @IBOutlet weak var tweetTextView: UITextView!
+    weak var delegate: TweetVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +29,7 @@ class TweetViewController: UIViewController {
     @IBAction func tweet(_ sender: Any) {
         if (!tweetTextView.text.isEmpty) {
             TwitterAPICaller.client?.postTweet(tweetString: tweetTextView.text, success: {
+                self.delegate?.refreshTweets()
                 self.dismiss(animated: true, completion: nil)
             }, failure: { (error) in
                 self.dismiss(animated: true, completion: nil)
@@ -33,6 +39,11 @@ class TweetViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
     }
+    
+    // override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+    //     self.dismiss(animated: flag)
+    //     delegate?.refreshTweets()
+    // }
     
     /*
     // MARK: - Navigation
