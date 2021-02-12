@@ -13,10 +13,13 @@ class TwitterAPICaller: BDBOAuth1SessionManager {
     static let client = TwitterAPICaller(baseURL: URL(string: "https://api.twitter.com"), consumerKey: "uFTmFW66AAMEUwx3rZlZDMSCf", consumerSecret: "LtlxIoQpBvHcqjpSMIA9Gs2E9wCJbr7xkx9EpSdBYoNedaZUgh")
     var loginSuccess: (() -> ())?
     var loginFailure: ((Error) -> ())?
+    var accessToken: BDBOAuth1Credential?
+    let secret = "LtlxIoQpBvHcqjpSMIA9Gs2E9wCJbr7xkx9EpSdBYoNedaZUgh"
     
     func handleOpenUrl(url: URL){
         let requestToken = BDBOAuth1Credential(queryString: url.query)
         TwitterAPICaller.client?.fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential!) in
+            self.accessToken = accessToken
             self.loginSuccess?()
         }, failure: { (error: Error!) in
             self.loginFailure?(error)
@@ -40,20 +43,45 @@ class TwitterAPICaller: BDBOAuth1SessionManager {
         loginSuccess = success
         loginFailure = failure
         TwitterAPICaller.client?.deauthorize()
+        var theUrl: URL?
         TwitterAPICaller.client?.fetchRequestToken(withPath: url, method: "GET", callbackURL: URL(string: "alamoTwitter://oauth"), scope: nil, success: { (requestToken: BDBOAuth1Credential!) -> Void in
-            let url = URL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token!)")!
-            UIApplication.shared.open(url)
+            theUrl = URL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token!)")!
+            UIApplication.shared.open(theUrl!)
         }, failure: { (error: Error!) -> Void in
+            UIApplication.shared.open(theUrl!)
             print("Error: \(error.localizedDescription)")
             self.loginFailure?(error)
         })
     }
     
     func logout (){
-        let returnStatus = deauthorize()
-        print("Return status: \(returnStatus)")
+        // deauthorize()
+        // let returnStatus = deauthorize()
+        // print("Return status: \(returnStatus)")
         // TwitterAPICaller.client?.deauthorize()
+        // invalidateToken {
+        //     print("invalidate success!")
+        // } failure: { (Error) in
+        //     print("invalidate failure! Error: \(Error)")
+        // }
+        // let url = "https://api.twitter.com/1.1/oauth/invalidate_token"
+        // if TwitterAPICaller.client != nil && accessToken != nil {
+        //     TwitterAPICaller.client?.post(url, parameters: ["access_token":accessToken!, "access_token_secret":secret], progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+        //         print("success")
+        //     }, failure: { (task: URLSessionDataTask?, error: Error) in
+        //         print("failure: \(error)")
+        //     })
+        // }
     }
+    
+    // func invalidateToken(success: @escaping () -> (), failure: @escaping (Error) -> ()){
+    //     let url = "https://api.twitter.com/1.1/oauth/invalidate_token"
+    //     TwitterAPICaller.client?.post(url, parameters: ["access_token":accessToken!, "access_token_secret":secret], progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+    //         success()
+    //     }, failure: { (task: URLSessionDataTask?, error: Error) in
+    //         failure(error)
+    //     })
+    // }
     
     func getDictionaryRequest(url: String, parameters: [String:Any], success: @escaping (NSDictionary) -> (), failure: @escaping (Error) -> ()){
         TwitterAPICaller.client?.get(url, parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
