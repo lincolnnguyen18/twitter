@@ -23,6 +23,19 @@ class TwitterAPICaller: BDBOAuth1SessionManager {
         })
     }
     
+    // func login(url: String, success: @escaping () -> (), failure: @escaping (Error) -> ()){
+    //     loginSuccess = success
+    //     loginFailure = failure
+    //     TwitterAPICaller.client?.deauthorize()
+    //     TwitterAPICaller.client?.fetchRequestToken(withPath: url, method: "GET", callbackURL: URL(string: "alamoTwitter://oauth"), scope: nil, success: { (requestToken: BDBOAuth1Credential!) -> Void in
+    //         let url = URL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token!)")!
+    //         UIApplication.shared.open(url)
+    //     }, failure: { (error: Error!) -> Void in
+    //         print("Error: \(error.localizedDescription)")
+    //         self.loginFailure?(error)
+    //     })
+    // }
+    
     func login(url: String, success: @escaping () -> (), failure: @escaping (Error) -> ()){
         loginSuccess = success
         loginFailure = failure
@@ -35,8 +48,11 @@ class TwitterAPICaller: BDBOAuth1SessionManager {
             self.loginFailure?(error)
         })
     }
+    
     func logout (){
-        deauthorize()
+        let returnStatus = deauthorize()
+        print("Return status: \(returnStatus)")
+        // TwitterAPICaller.client?.deauthorize()
     }
     
     func getDictionaryRequest(url: String, parameters: [String:Any], success: @escaping (NSDictionary) -> (), failure: @escaping (Error) -> ()){

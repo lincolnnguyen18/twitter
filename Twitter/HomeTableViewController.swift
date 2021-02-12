@@ -61,7 +61,7 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate {
         let myUrl = "https://api.twitter.com/1.1/statuses/home_timeline.json"
         let myParams: [String:Any] = ["count": numberofTweets!, "include_entities": "true"]
         TwitterAPICaller.client?.getDictionariesRequest(url: myUrl, parameters: myParams, success: { (tweets: [NSDictionary]) in
-            print(tweets)
+            // print(tweets)
             self.tweetArray.removeAll()
             for tweet in tweets {
                 self.tweetArray.append(tweet)
@@ -118,14 +118,130 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate {
         
         let user = tweetArray[indexPath.row]["user"] as! NSDictionary
         
+        // print(user)
+        print(tweetArray[indexPath.row])
+        
         cell.userNameLabel.text = user["name"] as? String
         cell.tweetContent.text = tweetArray[indexPath.row]["text"] as? String
         
-        let imageUrl = URL(string: (user["profile_image_url_https"] as? String)!)
+        var media1: UIImage?, media2: UIImage?, media3: UIImage?, media4: UIImage?
+        
+        
+        // let entities = tweetArray[indexPath.row]["entities"] as? NSDictionary
+        // print(entities ?? "nil")
+        let extendedEntities = tweetArray[indexPath.row]["extended_entities"] as? NSDictionary
+        // print(extendedEntities ?? "nil")
+        
+        // let media1Dict = entities?["media"] as? NSDictionary
+        // print(media1Dict)
+        
+        // if let pictureDict = snapshot.value["picture"] as? [String:AnyObject]{
+        //
+        //     if let dataDict = pictureDict.value["data"] as? [String:AnyObject]{
+        //
+        //         self.pictureURL =  dataDict.value["url"] as! String
+        //
+        //     }
+        // }
+        
+        // let url = ((snapshot.value as? NSDictionary)?["picture"] as? NSDictionary)?["url"] as? String
+        
+        // if let media1Array = entities?["media"] as? [AnyObject] {
+        //     // print("Size of media1Array is \(media1Array.count)")
+        //     // print(media1Array[0])
+        //     if let media1Dict = media1Array[0] as? NSDictionary {
+        //         // print(media1Dict)
+        //         if let media1Url = URL(string: media1Dict["media_url_https"] as! String) {
+        //             // print(media1Url)
+        //             if let imageData = try? Data(contentsOf: media1Url) {
+        //                 // print("imageData1 valid!")
+        //                 media1 = UIImage(data: imageData)
+        //             }
+        //         }
+        //     }
+        //     // if let media1Url = URL(string: media1Dict["media_url_https"] as! String) {
+        //     //     print(media1Url)
+        //     //     if let imageData = try? Data(contentsOf: media1Url) {
+        //     //         print("imageData1 valid!")
+        //     //         media1 = UIImage(data: imageData)
+        //     //         cell.media1.image = media1
+        //     //     }
+        //     // }
+        // }
+        
+        if let mediaArray = extendedEntities?["media"] as? [AnyObject] {
+            print("Size of extended_entities is \(mediaArray.count)")
+            
+            if mediaArray.count >= 1 {
+                if let media1Dict = mediaArray[0] as? NSDictionary {
+                    print(media1Dict)
+                    if let media1Url = URL(string: media1Dict["media_url_https"] as! String) {
+                        if let imageData = try? Data(contentsOf: media1Url) {
+                            print("imageData1 valid!")
+                            media1 = UIImage(data: imageData)
+                        }
+                    }
+                }
+            }
+            
+            if mediaArray.count >= 2 {
+                if let media2Dict = mediaArray[1] as? NSDictionary {
+                    print(media2Dict)
+                    if let media2Url = URL(string: media2Dict["media_url_https"] as! String) {
+                        if let imageData = try? Data(contentsOf: media2Url) {
+                            print("imageData2 valid!")
+                            media2 = UIImage(data: imageData)
+                        }
+                    }
+                }
+            }
+            
+            if mediaArray.count >= 3 {
+                if let media3Dict = mediaArray[2] as? NSDictionary {
+                    print(media3Dict)
+                    if let media3Url = URL(string: media3Dict["media_url_https"] as! String) {
+                        if let imageData = try? Data(contentsOf: media3Url) {
+                            print("imageData3 valid!")
+                            media3 = UIImage(data: imageData)
+                        }
+                    }
+                }
+            }
+            
+            if mediaArray.count >= 4 {
+                if let media4Dict = mediaArray[3] as? NSDictionary {
+                    print(media4Dict)
+                    if let media4Url = URL(string: media4Dict["media_url_https"] as! String) {
+                        if let imageData = try? Data(contentsOf: media4Url) {
+                            print("imageData4 valid!")
+                            media3 = UIImage(data: imageData)
+                        }
+                    }
+                }
+            }
+            // if let media1Url = URL(string: media1Dict["media_url_https"] as! String) {
+            //     print(media1Url)
+            //     if let imageData = try? Data(contentsOf: media1Url) {
+            //         print("imageData1 valid!")
+            //         media1 = UIImage(data: imageData)
+            //         cell.media1.image = media1
+            //     }
+            // }
+        }
+        
+        cell.setMedia(media1, media2, media3, media4)
+        
+        
+        let newImageUrlStr = self.replaceMatches(for: "_normal\\.", inString: user["profile_image_url_https"] as! String, withString: "\\.")
+        // let imageUrl = URL(string: newImageUrlStr as? String)!)
+        let imageUrl = URL(string: (newImageUrlStr)!)
+        
         let data = try? Data(contentsOf: imageUrl!)
         
         if let imageData = data {
             cell.profileImageView.image = UIImage(data: imageData)
+            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.size.width / 2
+            cell.profileImageView.layer.masksToBounds = true
         }
         
         cell.setFavorite(tweetArray[indexPath.row]["favorited"] as! Bool)
@@ -133,6 +249,15 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate {
         cell.setRetweeted(tweetArray[indexPath.row]["retweeted"] as! Bool)
         
         return cell
+    }
+    
+    private func replaceMatches(for pattern: String, inString string: String, withString replacementString: String) -> String? {
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
+            return string
+        }
+        
+        let range = NSRange(string.startIndex..., in: string)
+        return regex.stringByReplacingMatches(in: string, options: [], range: range, withTemplate: replacementString)
     }
 
     /*

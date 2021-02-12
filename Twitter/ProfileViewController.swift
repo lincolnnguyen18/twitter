@@ -33,8 +33,8 @@ class ProfileViewController: UIViewController {
             }
             self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
             self.profileImageView.layer.masksToBounds = true
-            self.profileImageView.layer.borderWidth = 2
-            self.profileImageView.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            // self.profileImageView.layer.borderWidth = 2
+            // self.profileImageView.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             
             self.nameLabel.text = user["name"] as? String
             self.descriptionLabel.text = user["description"] as? String
@@ -43,13 +43,13 @@ class ProfileViewController: UIViewController {
             // self.tweetsLabel.text = "\(user["statuses_count"] as? Int ?? 0) Tweets"
             self.followersLabel.attributedText = NSMutableAttributedString()
                 .bold("\(user["followers_count"] as? Int ?? 0) ")
-                .normal("Followers")
+                .greyHighlight("Followers")
             self.followingLabel.attributedText = NSMutableAttributedString()
                 .bold("\(user["friends_count"] as? Int ?? 0) ")
-                .normal("Following")
+                .greyHighlight("Following")
             self.tweetsLabel.attributedText = NSMutableAttributedString()
                 .bold("\(user["followers_count"] as? Int ?? 0) ")
-                .normal("Tweets")
+                .greyHighlight("Tweets")
         }, failure: { (Error) in
             print("Error in getting user: \(Error)")
         })
@@ -101,6 +101,16 @@ extension NSMutableAttributedString {
         
         let attributes:[NSAttributedString.Key : Any] = [
             .font : normalFont,
+        ]
+        
+        self.append(NSAttributedString(string: value, attributes:attributes))
+        return self
+    }
+    
+    func greyHighlight(_ value:String) -> NSMutableAttributedString {
+        let attributes:[NSAttributedString.Key : Any] = [
+            .font:  normalFont,
+            .foregroundColor: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         ]
         
         self.append(NSAttributedString(string: value, attributes:attributes))
