@@ -87,6 +87,25 @@ extension NSMutableAttributedString {
     var boldFont:UIFont { return UIFont.boldSystemFont(ofSize: fontSize) }
     var normalFont:UIFont { return UIFont.systemFont(ofSize: fontSize)}
     
+    func boldName(_ value: String) -> NSMutableAttributedString {
+        let attributes:[NSAttributedString.Key : Any] = [
+            .font: UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.bold)
+        ]
+        
+        self.append(NSAttributedString(string: value, attributes:attributes))
+        return self
+    }
+    
+    func greyHandleAndTim(_ value:String) -> NSMutableAttributedString {
+        let attributes:[NSAttributedString.Key : Any] = [
+            .font: UIFont.systemFont(ofSize: 13),
+            .foregroundColor: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        ]
+        
+        self.append(NSAttributedString(string: value, attributes:attributes))
+        return self
+    }
+    
     func bold(_ value:String) -> NSMutableAttributedString {
         
         let attributes:[NSAttributedString.Key : Any] = [
@@ -117,3 +136,19 @@ extension NSMutableAttributedString {
         return self
     }
 }
+
+extension String {
+    /*
+     Truncates the string to the specified length number of characters and appends an optional trailing string if longer.
+     - Parameter length: Desired maximum lengths of a string
+     - Parameter trailing: A 'String' that will be appended after the truncation.
+     
+     - Returns: 'String' object.
+     */
+    func trunc(length: Int, trailing: String = "…") -> String {
+        return (self.count > length) ? self.prefix(length) + trailing : self
+    }
+}
+
+// // Swift 4.0 Example
+// let str = "I might be just a little bit too long".truncate(10) // "I might be…"

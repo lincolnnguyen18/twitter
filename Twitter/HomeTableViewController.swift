@@ -131,12 +131,50 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath) as! TweetCellTableViewCell
         
+        let tweet = tweetArray[indexPath.row] as! NSDictionary
         let user = tweetArray[indexPath.row]["user"] as! NSDictionary
         
-        print(user)
+        // print(user)
+        print(tweetArray[indexPath.row] as! NSDictionary)
         print(tweetArray[indexPath.row])
         
+        // cell.userNameLabel.text = user["name"] as? String
+        
+        // let attributes: [NSAttributedString.Key: Any] = [
+        //     .font: font
+        // ]
+        
+        // let quote = (user["name"] as? String)!
+        // let font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.bold)
+        // let attributes: [NSAttributedString.Key: Any] = [
+        //     .font: font
+        // ]
+        // var attributedQuote = NSAttributedString(string: quote, attributes: attributes)
+        
+        // let truncName = (user["name"] as! String).trunc(length: 10)
+        
+        
+        // let test = "123456789fjewlafjlaw;j"
+        // print(test.trunc(length: 9))
+        
+        /*
+        @@@@@@@@@@ @@@@@@@ · 45m
+        10, 1, 7, 3, 3
+        */
+        
+        // cell.userNameLabel.attributedText = NSMutableAttributedString()
+        //     .boldName("\(truncName) ")
+            
+        
+        // cell.userNameLabel.attributedText = NSMutableAttributedString()
+        //     .bold("\(user["name"] as? String)")
+        
         cell.userNameLabel.text = user["name"] as? String
+        cell.handleLabel.text = "@\(user["screen_name"] as! String)"
+        
+        
+        
+        cell.timeLabel.text = " · \(tweet["created_at"] as! String)"
         
         cell.tweetContent.text = tweetArray[indexPath.row]["text"] as? String
         

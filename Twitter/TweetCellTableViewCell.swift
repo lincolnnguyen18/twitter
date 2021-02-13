@@ -11,6 +11,8 @@ import UIKit
 class TweetCellTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var handleLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var tweetContent: UILabel!
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
@@ -34,7 +36,7 @@ class TweetCellTableViewCell: UITableViewCell {
             self.media1.image = image1
             self.media1.layer.cornerRadius = self.media1.frame.size.width / 15
             self.media1.layer.masksToBounds = true
-            self.media1.layer.borderWidth = 1
+            self.media1.layer.borderWidth = 1.2
             self.media1.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             self.mediaStack.addSubview(media1)
             self.mediaStack.addArrangedSubview(media1)
@@ -48,7 +50,7 @@ class TweetCellTableViewCell: UITableViewCell {
             self.media2.image = image2
             self.media2.layer.cornerRadius = self.media2.frame.size.width / 15
             self.media2.layer.masksToBounds = true
-            self.media2.layer.borderWidth = 1
+            self.media2.layer.borderWidth = 1.2
             self.media2.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             self.mediaStack.addSubview(media2)
             self.mediaStack.addArrangedSubview(media2)
@@ -62,7 +64,7 @@ class TweetCellTableViewCell: UITableViewCell {
             self.media3.image = image3
             self.media3.layer.cornerRadius = self.media3.frame.size.width / 15
             self.media3.layer.masksToBounds = true
-            self.media3.layer.borderWidth = 1
+            self.media3.layer.borderWidth = 1.2
             self.media3.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             self.mediaStack.addSubview(media3)
             self.mediaStack.addArrangedSubview(media3)
@@ -76,7 +78,7 @@ class TweetCellTableViewCell: UITableViewCell {
             self.media4.image = image4
             self.media4.layer.cornerRadius = self.media4.frame.size.width / 15
             self.media4.layer.masksToBounds = true
-            self.media4.layer.borderWidth = 1
+            self.media4.layer.borderWidth = 1.2
             self.media4.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             self.mediaStack.addSubview(media4)
             self.mediaStack.addArrangedSubview(media4)
