@@ -7,8 +7,17 @@
 //
 
 import UIKit
+import Lightbox
 
-class HomeTableViewController: UITableViewController, TweetVCDelegate {
+class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxControllerPageDelegate, LightboxControllerDismissalDelegate {
+    func lightboxController(_ controller: LightboxController, didMoveToPage page: Int) {
+        
+    }
+    
+    func lightboxControllerWillDismiss(_ controller: LightboxController) {
+        
+    }
+    
 
     var tweetArray = [NSDictionary]()
     var numberofTweets: Int!
@@ -271,12 +280,23 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate {
     func getGestureRecognizer() -> UITapGestureRecognizer {
         var tapRecognizer = UITapGestureRecognizer()
         tapRecognizer = UITapGestureRecognizer (target: self, action: #selector(didTapImageView(_:)))
+        
         return tapRecognizer
     }
     
     @objc private func didTapImageView(_ sender: UITapGestureRecognizer) {
         print("An media tpaped!", sender)
-        performSegue(withIdentifier: "toMedia", sender: self)
+        // performSegue(withIdentifier: "toMedia", sender: self)
+        let cell = sender.view as! UIImageView
+        let imageToSend = cell.image
+        let images = [
+            LightboxImage(image: imageToSend!)
+        ]
+        let controller = LightboxController(images: images)
+        controller.pageDelegate = self
+        controller.dismissalDelegate = self
+        controller.dynamicBackground = true
+        present(controller, animated: true, completion: nil)
     }
     
     private func replaceMatches(for pattern: String, inString string: String, withString replacementString: String) -> String? {

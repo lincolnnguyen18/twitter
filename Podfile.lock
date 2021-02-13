@@ -19,11 +19,17 @@ PODS:
     - Alamofire (~> 4.8)
   - BDBOAuth1Manager (2.0.0):
     - AFNetworking/NSURLSession (~> 3.0.0)
+  - Cache (6.0.0)
+  - Imaginary (5.0.0):
+    - Cache (~> 6.0.0)
+  - Lightbox (2.5.0):
+    - Imaginary (~> 5.0.0)
 
 DEPENDENCIES:
   - AFNetworking
   - AlamofireImage
   - BDBOAuth1Manager
+  - Lightbox
 
 SPEC REPOS:
   trunk:
@@ -31,13 +37,19 @@ SPEC REPOS:
     - Alamofire
     - AlamofireImage
     - BDBOAuth1Manager
+    - Cache
+    - Imaginary
+    - Lightbox
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
   AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
   BDBOAuth1Manager: 92d17d06f8a648602962304cd2f35ae7394fa001
+  Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
+  Imaginary: cf5e3a7dd6ab1dcbd47ba8ce5edf2307c4e99eb3
+  Lightbox: cc3d5124f024fa8197fd23f913160db1c61a1852
 
-PODFILE CHECKSUM: e13b2a8b0a1b932e28dfe6a5b2954cbb1f509412
+PODFILE CHECKSUM: 27894957391464130440e21d8d9e2ecc8d12b971
 
 COCOAPODS: 1.10.1
