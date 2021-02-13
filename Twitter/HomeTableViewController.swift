@@ -11,7 +11,75 @@ import Lightbox
 import SwiftDate
 // import DateToolsSwift
 
+extension UIWindow {
+    static var key: UIWindow? {
+        if #available(iOS 13, *) {
+            return UIApplication.shared.windows.first { $0.isKeyWindow }
+        } else {
+            return UIApplication.shared.keyWindow
+        }
+    }
+}
+
+// override UIButton.isHighlighted {
+//     didSet {
+//         if (highlighted) {
+//             btn.backgroundColor = #colorLiteral(red: 0.1066790186, green: 0.6003596351, blue: 0.903967756, alpha: 1)
+//         } else {
+//             btn.backgroundColor = #colorLiteral(red: 0.1137254902, green: 0.631372549, blue: 0.9490196078, alpha: 1)
+//         }
+//     }
+// }
+
+var btn = highlightButton(type: .custom)
+func floatingButton() {
+    let circleLocation = 75
+    let circleWidth = 55
+    // btn.frame = CGRect(x: locationX, y: locationY, width: circleWidth, height: circleWidth)
+    btn.frame = CGRect(x: Int(UIApplication.shared.keyWindow!.bounds.width) - circleLocation, y: Int(UIApplication.shared.keyWindow!.bounds.height) - circleLocation - 49, width: circleWidth, height: circleWidth)
+    // btn.setTitle("All Defects", for: .normal)
+    btn.setImage(UIImage(named: "compose"), for: UIControl.State.normal)
+    
+    btn.backgroundColor = #colorLiteral(red: 0.1137254902, green: 0.631372549, blue: 0.9490196078, alpha: 1)
+    btn.clipsToBounds = true
+    btn.layer.cornerRadius = btn.frame.width / 2
+    // btn.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    // btn.layer.borderWidth = 1.0
+    btn.layer.masksToBounds = false
+    btn.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    btn.layer.shadowOffset = CGSize(width: 20, height: 20)
+    // btn.layer.shadowOffset = .zero
+    btn.layer.shadowOpacity = 0.8
+    btn.layer.shadowRadius = CGFloat(circleWidth / 2)
+    // btn.layer.shadowRadius = 20
+    // btn.layer.shadowPath = UIBezierPath(rect: btn.bounds).cgPath
+    btn.layer.shadowPath = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: btn.frame.width - 20, height: btn.frame.height - 20)).cgPath
+    
+    btn.adjustsImageWhenHighlighted = false
+    
+    // btn..add
+    if let window = UIApplication.shared.keyWindow {
+        window.addSubview(btn)
+    }
+}
+
 class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxControllerPageDelegate, LightboxControllerDismissalDelegate {
+    // @IBOutlet weak var floatingButton: UIButton!
+    //
+    // override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    //     let off = scrollView.contentOffset.y
+    //     floatingButton.frame = CGRect(x: 285, y: off + 485, width: floatingButton.frame.size.width, height: floatingButton.frame.size.height)
+    // }
+    
+    @IBAction func buttonTapped(_ sender: highlightButton) {
+        // if sender.isHighlighted {
+        //     sender.backgroundColor = #colorLiteral(red: 0.1019546434, green: 0.5737721751, blue: 0.8639347404, alpha: 1)
+        // } else {
+        //     sender.backgroundColor = #colorLiteral(red: 0.1137254902, green: 0.631372549, blue: 0.9490196078, alpha: 1)
+        // }
+        print("sucess!")
+    }
+    
     func lightboxController(_ controller: LightboxController, didMoveToPage page: Int) {
         
     }
@@ -20,7 +88,6 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         
     }
     
-
     var tweetArray = [NSDictionary]()
     var numberofTweets: Int!
     
@@ -42,7 +109,12 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         numberofTweets = 10
         super.viewDidLoad()
         // disable temporarily ************************************************************************************************
-        loadTweets()
+        
+        floatingButton()
+        
+        btn.addTarget(self, action: #selector(buttonTapped(_:)), for: UIControl.Event.touchUpInside)
+        
+        // loadTweets()
         // self.isModalInPresentation = true
         // self.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
         
@@ -51,6 +123,8 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         // imageView.contentMode = .scaleAspectFit
         // imageView.image = image
         // self.navigationItem.titleView = imageView
+        
+        // self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 30)!]
         
         myRefreshControl.addTarget(self, action: #selector(loadTweets), for: .valueChanged)
         tableView.refreshControl = myRefreshControl
@@ -133,6 +207,10 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath) as! TweetCellTableViewCell
         
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
+        
         let tweet = tweetArray[indexPath.row]
         let user = tweetArray[indexPath.row]["user"] as! NSDictionary
         
@@ -171,7 +249,11 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         //     .bold("\(user["name"] as? String)")
         
         cell.userNameLabel.text = user["name"] as? String
+        // cell.userNameLabel.addCharacterSpacing(kernValue: 0.2)
+        
+        
         cell.handleLabel.text = "@\(user["screen_name"] as! String)"
+        cell.handleLabel.addCharacterSpacing(kernValue: 0.2)
         
         let timeString = tweet["created_at"] as! String
         
@@ -187,8 +269,26 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         
         cell.timeLabel.text = " · \(testRelativeTime!)"
         
-        cell.tweetContent.text = tweetArray[indexPath.row]["text"] as? String
         
+        cell.tweetContent.text = tweetArray[indexPath.row]["text"] as? String
+        cell.tweetContent.addCharacterSpacing(kernValue: 0.2)
+        cell.tweetContent.addInterlineSpacing(spacingValue: 5)
+        
+        //
+        // var style = NSMutableParagraphStyle()
+        // let stringValue = cell.tweetContent.text!
+        // let attrString = NSMutableAttributedString(string: stringValue)
+        // style.lineSpacing = 36
+        // style.minimumLineHeight = 30
+        // attrString.addAttribute(
+        //     .paragraphStyle,
+        //     value: NSParagraphStyle
+        //     range: NSRange(location: 0, length: attrString.length)
+        // ))
+        // cell.tweetContent.attributedText = attrString
+        //
+        // cell.tweetContent.attributedText = attrString
+        //
         var media1: UIImage?, media2: UIImage?, media3: UIImage?, media4: UIImage?
         
         
@@ -426,4 +526,44 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
     }
     */
 
+}
+
+extension UILabel {
+    func addCharacterSpacing(kernValue: Double = 1.15) {
+        if let labelText = text, labelText.count > 0 {
+            let attributedString = NSMutableAttributedString(string: labelText)
+            attributedString.addAttribute(NSAttributedString.Key.kern, value: kernValue, range: NSRange(location: 0, length: attributedString.length - 1))
+            attributedText = attributedString
+        }
+    }
+}
+
+private extension UILabel {
+    
+    // MARK: - spacingValue is spacing that you need
+    func addInterlineSpacing(spacingValue: CGFloat = 2) {
+        
+        // MARK: - Check if there's any text
+        guard let textString = text else { return }
+        
+        // MARK: - Create "NSMutableAttributedString" with your text
+        let attributedString = NSMutableAttributedString(string: textString)
+        
+        // MARK: - Create instance of "NSMutableParagraphStyle"
+        let paragraphStyle = NSMutableParagraphStyle()
+        
+        // MARK: - Actually adding spacing we need to ParagraphStyle
+        paragraphStyle.lineSpacing = spacingValue
+        
+        // MARK: - Adding ParagraphStyle to your attributed String
+        attributedString.addAttribute(
+            .paragraphStyle,
+            value: paragraphStyle,
+            range: NSRange(location: 0, length: attributedString.length
+            ))
+        
+        // MARK: - Assign string that you've modified to current attributed Text
+        attributedText = attributedString
+    }
+    
 }

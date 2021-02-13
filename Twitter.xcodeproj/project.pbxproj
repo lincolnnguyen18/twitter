@@ -16,6 +16,9 @@
 		D40AD4E625D5247300A295F2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40AD4E525D5247300A295F2 /* ProfileViewController.swift */; };
 		D4809F4725D26226002030EA /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4809F4625D26226002030EA /* HomeTableViewController.swift */; };
 		D4809F4A25D2681C002030EA /* TweetCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4809F4925D2681C002030EA /* TweetCellTableViewCell.swift */; };
+		D486245E25D7D5DA00733237 /* HelveticaNeueLTPro-55Roman.otf in Resources */ = {isa = PBXBuildFile; fileRef = D486245C25D7D5DA00733237 /* HelveticaNeueLTPro-55Roman.otf */; };
+		D486245F25D7D5DA00733237 /* HelveticaNeueLTPro-75Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D486245D25D7D5DA00733237 /* HelveticaNeueLTPro-75Bold.otf */; };
+		D486246225D808F300733237 /* highlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D486246125D808F300733237 /* highlightButton.swift */; };
 		D48B0FAF25D25C78006111DB /* LoginViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48B0FAE25D25C78006111DB /* LoginViewViewController.swift */; };
 		D4C9D14125D48B5D00CDDF60 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C9D14025D48B5D00CDDF60 /* TweetViewController.swift */; };
 		D4E07EE525D74DA5003CD7DA /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07EE425D74DA5003CD7DA /* MediaViewController.swift */; };
@@ -35,6 +38,9 @@
 		D40AD4E525D5247300A295F2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D4809F4625D26226002030EA /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		D4809F4925D2681C002030EA /* TweetCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetCellTableViewCell.swift; sourceTree = "<group>"; };
+		D486245C25D7D5DA00733237 /* HelveticaNeueLTPro-55Roman.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HelveticaNeueLTPro-55Roman.otf"; path = "../../../Desktop/Twitter Tweet template - Helvetica/Fonts/HelveticaNeueLTPro-55Roman.otf"; sourceTree = "<group>"; };
+		D486245D25D7D5DA00733237 /* HelveticaNeueLTPro-75Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HelveticaNeueLTPro-75Bold.otf"; path = "../../../Desktop/Twitter Tweet template - Helvetica/Fonts/HelveticaNeueLTPro-75Bold.otf"; sourceTree = "<group>"; };
+		D486246125D808F300733237 /* highlightButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = highlightButton.swift; sourceTree = "<group>"; };
 		D48B0FAE25D25C78006111DB /* LoginViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewViewController.swift; sourceTree = "<group>"; };
 		D4C9D14025D48B5D00CDDF60 /* TweetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
 		D4E07EE425D74DA5003CD7DA /* MediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
@@ -90,9 +96,12 @@
 				6EBCF53121DF07FE00451C03 /* Info.plist */,
 				D48B0FAE25D25C78006111DB /* LoginViewViewController.swift */,
 				D4809F4625D26226002030EA /* HomeTableViewController.swift */,
+				D486246125D808F300733237 /* highlightButton.swift */,
 				D4E07EE425D74DA5003CD7DA /* MediaViewController.swift */,
 				D4809F4925D2681C002030EA /* TweetCellTableViewCell.swift */,
 				D4C9D14025D48B5D00CDDF60 /* TweetViewController.swift */,
+				D486245C25D7D5DA00733237 /* HelveticaNeueLTPro-55Roman.otf */,
+				D486245D25D7D5DA00733237 /* HelveticaNeueLTPro-75Bold.otf */,
 				D40AD4E525D5247300A295F2 /* ProfileViewController.swift */,
 			);
 			path = Twitter;
@@ -167,6 +176,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D486245E25D7D5DA00733237 /* HelveticaNeueLTPro-55Roman.otf in Resources */,
+				D486245F25D7D5DA00733237 /* HelveticaNeueLTPro-75Bold.otf in Resources */,
 				6EBCF54E21E71F9400451C03 /* Launch Screen.storyboard in Resources */,
 				37D29B8621F90E3400984A88 /* Assets.xcassets in Resources */,
 				6EBCF52B21DF07FC00451C03 /* Main.storyboard in Resources */,
@@ -225,6 +236,7 @@
 				6EBCF52621DF07FC00451C03 /* AppDelegate.swift in Sources */,
 				D40AD4E625D5247300A295F2 /* ProfileViewController.swift in Sources */,
 				D4809F4A25D2681C002030EA /* TweetCellTableViewCell.swift in Sources */,
+				D486246225D808F300733237 /* highlightButton.swift in Sources */,
 				D48B0FAF25D25C78006111DB /* LoginViewViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -129,7 +129,7 @@ extension NSMutableAttributedString {
     func greyHighlight(_ value:String) -> NSMutableAttributedString {
         let attributes:[NSAttributedString.Key : Any] = [
             .font:  normalFont,
-            .foregroundColor: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            .foregroundColor: #colorLiteral(red: 0.3568627451, green: 0.4392156863, blue: 0.5137254902, alpha: 1)
         ]
         
         self.append(NSAttributedString(string: value, attributes:attributes))

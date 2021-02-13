@@ -47,6 +47,11 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>HelveticaNeueLTPro-55Roman.otf</string>
+		<string>HelveticaNeueLTPro-75Bold</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
