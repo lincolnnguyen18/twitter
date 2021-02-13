@@ -287,15 +287,39 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
     @objc private func didTapImageView(_ sender: UITapGestureRecognizer) {
         print("An media tpaped!", sender)
         // performSegue(withIdentifier: "toMedia", sender: self)
-        let cell = sender.view as! UIImageView
-        let imageToSend = cell.image
-        let images = [
-            LightboxImage(image: imageToSend!)
-        ]
-        let controller = LightboxController(images: images)
+        let tappedImage = sender.view as! UIImageView
+        let tappedCell = sender.view?.superview?.superview?.superview as! TweetCellTableViewCell
+        
+        print(tappedImage.tag)
+        
+        var mediaArray: [LightboxImage] = []
+        
+        if tappedCell.media1.image != nil {
+            mediaArray.append(LightboxImage(image: tappedCell.media1.image!))
+        }
+        if tappedCell.media2.image != nil {
+            mediaArray.append(LightboxImage(image: tappedCell.media2.image!))
+        }
+        if tappedCell.media3.image != nil {
+            mediaArray.append(LightboxImage(image: tappedCell.media3.image!))
+        }
+        if tappedCell.media4.image != nil {
+            mediaArray.append(LightboxImage(image: tappedCell.media4.image!))
+        }
+        
+        // let imageToSend = cell.image
+        // let images = [
+        //     LightboxImage(image: mediaArray[0]),
+        //     LightboxImage(image: mediaArray[1]),
+        //     LightboxImage(image: mediaArray[2]),
+        //     LightboxImage(image: mediaArray[3])
+        // ]
+        
+        let controller = LightboxController(images: mediaArray)
         controller.pageDelegate = self
         controller.dismissalDelegate = self
         controller.dynamicBackground = true
+        controller.goTo(tappedImage.tag)
         present(controller, animated: true, completion: nil)
     }
     
