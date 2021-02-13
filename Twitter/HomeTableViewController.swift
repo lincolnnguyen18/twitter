@@ -8,6 +8,8 @@
 
 import UIKit
 import Lightbox
+import SwiftDate
+// import DateToolsSwift
 
 class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxControllerPageDelegate, LightboxControllerDismissalDelegate {
     func lightboxController(_ controller: LightboxController, didMoveToPage page: Int) {
@@ -131,11 +133,10 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath) as! TweetCellTableViewCell
         
-        let tweet = tweetArray[indexPath.row] as! NSDictionary
+        let tweet = tweetArray[indexPath.row]
         let user = tweetArray[indexPath.row]["user"] as! NSDictionary
         
         // print(user)
-        print(tweetArray[indexPath.row] as! NSDictionary)
         print(tweetArray[indexPath.row])
         
         // cell.userNameLabel.text = user["name"] as? String
@@ -172,9 +173,19 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         cell.userNameLabel.text = user["name"] as? String
         cell.handleLabel.text = "@\(user["screen_name"] as! String)"
         
+        let timeString = tweet["created_at"] as! String
         
+        // let parsedTime = timeString.toDate("ddd MM d HH:mm:ss K yyyy")
+        let parsedTime = timeString.toDate("ccc MMM dd HH:mm:ss xxxx yyyy")
+        print(parsedTime?.toFormat("dd MMM yyyy 'at' HH:mm"))
+        // print(parsedTime - Date()).toRelative()
+        let testRelativeTime = (parsedTime?.toRelative(since: DateInRegion(), style: RelativeFormatter.defaultStyle(), locale: Locales.english))
+        print(testRelativeTime)
+        let testRelativeTimeStr = testRelativeTime as! String
+        let testRelativeTimeComponents = testRelativeTimeStr.components(separatedBy: " ")
+        print(testRelativeTimeComponents)
         
-        cell.timeLabel.text = " · \(tweet["created_at"] as! String)"
+        cell.timeLabel.text = " · \(testRelativeTime!)"
         
         cell.tweetContent.text = tweetArray[indexPath.row]["text"] as? String
         

@@ -9,4 +9,6 @@ target 'Twitter' do
   pod 'BDBOAuth1Manager'
   pod 'AlamofireImage'
   pod 'Lightbox'
+  pod 'SwiftDate'
+  pod 'DateToolsSwift'
 end
