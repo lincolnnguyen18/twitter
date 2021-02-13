@@ -9,10 +9,12 @@
 import UIKit
 
 class LoginViewViewController: UIViewController {
+    @IBOutlet weak var loginButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        self.loginButton.layer.cornerRadius = self.loginButton.frame.size.width / 10
+        self.loginButton.layer.masksToBounds = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -27,7 +29,7 @@ class LoginViewViewController: UIViewController {
             UserDefaults.standard.set(true, forKey: "userLoggedIn")
             self.performSegue(withIdentifier: "loginToHome", sender: self)
         }, failure: { (Error) in
-            print("Could not log in!")
+            print("Could not log in! \(Error)")
         })
     }
 

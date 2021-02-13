@@ -14,7 +14,11 @@ class TweetCellTableViewCell: UITableViewCell {
     @IBOutlet weak var tweetContent: UILabel!
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
-    @IBOutlet var media1: UIImageView!
+    @IBOutlet var media1: UIImageView! {
+        didSet {
+            media1.isUserInteractionEnabled = true
+        }
+    }
     @IBOutlet var media2: UIImageView!
     @IBOutlet var media3: UIImageView!
     @IBOutlet var media4: UIImageView!
@@ -86,6 +90,12 @@ class TweetCellTableViewCell: UITableViewCell {
         // self.media3.image = image3
         // self.media4.image = image4
         // }
+        
+        // let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapImageView(_:)))
+        // self.media1.addGestureRecognizer(tapGestureRecognizer)
+        // self.media2.addGestureRecognizer(tapGestureRecognizer)
+        // self.media3.addGestureRecognizer(tapGestureRecognizer)
+        // self.media4.addGestureRecognizer(tapGestureRecognizer)
     }
     
     @IBAction func favoriteTweet(_ sender: Any) {
@@ -142,10 +152,10 @@ class TweetCellTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    // override func setSelected(_ selected: Bool, animated: Bool) {
+    //     super.setSelected(selected, animated: animated)
+    // 
+    //     // Configure the view for the selected state
+    // }
 
 }

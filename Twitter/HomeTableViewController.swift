@@ -35,6 +35,12 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate {
         // self.isModalInPresentation = true
         // self.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
         
+        // let image: UIImage = UIImage(named: "TwitterLogo")!
+        // let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        // imageView.contentMode = .scaleAspectFit
+        // imageView.image = image
+        // self.navigationItem.titleView = imageView
+        
         myRefreshControl.addTarget(self, action: #selector(loadTweets), for: .valueChanged)
         tableView.refreshControl = myRefreshControl
         
@@ -118,10 +124,11 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate {
         
         let user = tweetArray[indexPath.row]["user"] as! NSDictionary
         
-        // print(user)
+        print(user)
         print(tweetArray[indexPath.row])
         
         cell.userNameLabel.text = user["name"] as? String
+        
         cell.tweetContent.text = tweetArray[indexPath.row]["text"] as? String
         
         var media1: UIImage?, media2: UIImage?, media3: UIImage?, media4: UIImage?
@@ -170,14 +177,14 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate {
         // }
         
         if let mediaArray = extendedEntities?["media"] as? [AnyObject] {
-            print("Size of extended_entities is \(mediaArray.count)")
+            // print("Size of extended_entities is \(mediaArray.count)")
             
             if mediaArray.count >= 1 {
-                if let media1Dict = mediaArray[0] as? NSDictionary {
-                    print(media1Dict)
-                    if let media1Url = URL(string: media1Dict["media_url_https"] as! String) {
-                        if let imageData = try? Data(contentsOf: media1Url) {
-                            print("imageData1 valid!")
+                if let mediaDict = mediaArray[0] as? NSDictionary {
+                    // print(media1Dict)
+                    if let mediaUrl = URL(string: mediaDict["media_url_https"] as! String) {
+                        if let imageData = try? Data(contentsOf: mediaUrl) {
+                            // print("imageData1 valid!")
                             media1 = UIImage(data: imageData)
                         }
                     }
@@ -185,11 +192,11 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate {
             }
             
             if mediaArray.count >= 2 {
-                if let media2Dict = mediaArray[1] as? NSDictionary {
-                    print(media2Dict)
-                    if let media2Url = URL(string: media2Dict["media_url_https"] as! String) {
-                        if let imageData = try? Data(contentsOf: media2Url) {
-                            print("imageData2 valid!")
+                if let mediaDict = mediaArray[1] as? NSDictionary {
+                    // print(media2Dict)
+                    if let mediaUrl = URL(string: mediaDict["media_url_https"] as! String) {
+                        if let imageData = try? Data(contentsOf: mediaUrl) {
+                            // print("imageData2 valid!")
                             media2 = UIImage(data: imageData)
                         }
                     }
@@ -197,11 +204,11 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate {
             }
             
             if mediaArray.count >= 3 {
-                if let media3Dict = mediaArray[2] as? NSDictionary {
-                    print(media3Dict)
-                    if let media3Url = URL(string: media3Dict["media_url_https"] as! String) {
-                        if let imageData = try? Data(contentsOf: media3Url) {
-                            print("imageData3 valid!")
+                if let mediaDict = mediaArray[2] as? NSDictionary {
+                    // print(media3Dict)
+                    if let mediaUrl = URL(string: mediaDict["media_url_https"] as! String) {
+                        if let imageData = try? Data(contentsOf: mediaUrl) {
+                            // print("imageData3 valid!")
                             media3 = UIImage(data: imageData)
                         }
                     }
@@ -209,12 +216,12 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate {
             }
             
             if mediaArray.count >= 4 {
-                if let media4Dict = mediaArray[3] as? NSDictionary {
-                    print(media4Dict)
-                    if let media4Url = URL(string: media4Dict["media_url_https"] as! String) {
-                        if let imageData = try? Data(contentsOf: media4Url) {
-                            print("imageData4 valid!")
-                            media3 = UIImage(data: imageData)
+                if let mediaDict = mediaArray[3] as? NSDictionary {
+                    // print(media4Dict)
+                    if let mediaUrl = URL(string: mediaDict["media_url_https"] as! String) {
+                        if let imageData = try? Data(contentsOf: mediaUrl) {
+                            // print("imageData4 valid!")
+                            media4 = UIImage(data: imageData)
                         }
                     }
                 }
@@ -231,6 +238,16 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate {
         
         cell.setMedia(media1, media2, media3, media4)
         
+        // let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapImageView(_:)))
+        cell.media1.addGestureRecognizer(getGestureRecognizer())
+        cell.media2.addGestureRecognizer(getGestureRecognizer())
+        cell.media3.addGestureRecognizer(getGestureRecognizer())
+        cell.media4.addGestureRecognizer(getGestureRecognizer())
+        
+        cell.media1.isUserInteractionEnabled = true
+        cell.media2.isUserInteractionEnabled = true
+        cell.media3.isUserInteractionEnabled = true
+        cell.media4.isUserInteractionEnabled = true
         
         let newImageUrlStr = self.replaceMatches(for: "_normal\\.", inString: user["profile_image_url_https"] as! String, withString: "\\.")
         // let imageUrl = URL(string: newImageUrlStr as? String)!)
@@ -249,6 +266,17 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate {
         cell.setRetweeted(tweetArray[indexPath.row]["retweeted"] as! Bool)
         
         return cell
+    }
+    
+    func getGestureRecognizer() -> UITapGestureRecognizer {
+        var tapRecognizer = UITapGestureRecognizer()
+        tapRecognizer = UITapGestureRecognizer (target: self, action: #selector(didTapImageView(_:)))
+        return tapRecognizer
+    }
+    
+    @objc private func didTapImageView(_ sender: UITapGestureRecognizer) {
+        print("An media tpaped!", sender)
+        performSegue(withIdentifier: "toMedia", sender: self)
     }
     
     private func replaceMatches(for pattern: String, inString string: String, withString replacementString: String) -> String? {
