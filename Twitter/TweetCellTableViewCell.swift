@@ -28,6 +28,45 @@ class TweetCellTableViewCell: UITableViewCell {
     @IBOutlet weak var cellView: UIView!
     @IBOutlet var stupidConsraint: NSLayoutConstraint!
     
+    var timeSince: TimeSince? {
+        didSet {
+            // taskLabel.text = task?.name
+            // setState()
+            updateTime()
+        }
+    }
+    
+    func updateTime() {
+        guard let timeSince = timeSince else {
+            return
+        }
+        
+        let time = Date().timeIntervalSince(timeSince.start!)
+        
+        let hours = Int(time) / 3600
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        
+        // var times: [String] = []
+        // if hours > 0 {
+        //     times.append("\(hours)h")
+        // }
+        // if minutes > 0 {
+        //     times.append("\(minutes)m")
+        // }
+        // times.append("\(seconds)s")
+        //
+        // timeLabel.text = times.joined(separator: " ")
+        
+        if hours > 0 {
+            timeLabel.text = " · \(hours)h"
+        } else if minutes > 0 {
+            timeLabel.text = " · \(minutes)m"
+        } else if seconds > 0 {
+            timeLabel.text = " · \(seconds)s"
+        }
+    }
+    
     func setMedia(_ image1: UIImage?, _ image2: UIImage?, _ image3: UIImage?, _ image4: UIImage?) {
         
         // let stupidConstraintCopy = stupidConsraint as! NSLayoutConstraint

@@ -262,7 +262,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="500" verticalHuggingPriority="252" text="@nytimes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAG-b7-PJx" customClass="PaddingLabel" customModule="Twitter" customModuleProvider="target">
-                                            <rect key="frame" x="164.66666666666666" y="17" width="72.666666666666657" height="17"/>
+                                            <rect key="frame" x="164.66666666666666" y="17" width="68.666666666666657" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="17" id="2wp-az-RbJ"/>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" id="ZrK-tS-ePY"/>
@@ -347,7 +347,7 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text=" · 99m" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hca-Ka-4hi">
-                                            <rect key="frame" x="237.33333333333337" y="17" width="45" height="17"/>
+                                            <rect key="frame" x="233.33333333333334" y="17" width="45.000000000000028" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="45" id="c53-8v-pI4"/>
                                                 <constraint firstAttribute="height" constant="17" id="fHR-M1-j8Z"/>
@@ -436,6 +436,7 @@
                     </navigationItem>
                     <size key="freeformSize" width="375" height="2000"/>
                     <connections>
+                        <outlet property="tweetTableView" destination="PFb-6h-5cH" id="SwU-C7-aam"/>
                         <segue destination="52B-An-2ih" kind="presentation" identifier="toMedia" modalPresentationStyle="overFullScreen" id="UTC-j0-PQW"/>
                     </connections>
                 </tableViewController>
@@ -646,7 +647,7 @@
     </scenes>
     <designables>
         <designable name="FAG-b7-PJx">
-            <size key="intrinsicContentSize" width="72.666666666666671" height="28.666666666666668"/>
+            <size key="intrinsicContentSize" width="68.666666666666671" height="18.666666666666668"/>
         </designable>
     </designables>
     <resources>

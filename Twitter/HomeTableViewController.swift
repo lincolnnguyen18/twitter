@@ -71,6 +71,13 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
     //     floatingButton.frame = CGRect(x: 285, y: off + 485, width: floatingButton.frame.size.width, height: floatingButton.frame.size.height)
     // }
     
+    var timer: Timer?
+    
+    var timerList: [TimeSince] = []
+
+    @IBOutlet var tweetTableView: UITableView!
+    
+    
     @IBAction func buttonTapped(_ sender: highlightButton) {
         // if sender.isHighlighted {
         //     sender.backgroundColor = #colorLiteral(red: 0.1019546434, green: 0.5737721751, blue: 0.8639347404, alpha: 1)
@@ -109,12 +116,12 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
     override func viewDidLoad() {
         numberofTweets = 10
         super.viewDidLoad()
-        // disable temporarily ************************************************************************************************
         
         floatingButton()
         
         btn.addTarget(self, action: #selector(buttonTapped(_:)), for: UIControl.Event.touchUpInside)
         
+        // disable temporarily ************************************************************************************************
         // loadTweets()
         // self.isModalInPresentation = true
         // self.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
@@ -149,14 +156,52 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
     //     // print("WHY NOT WORKING!?!?!?")
     // }
     
+    @objc func addNewTimer(_ tweetCreatedTime: Date) {
+        createTimer()
+        
+        let timer = TimeSince(tweetCreatedTime)
+        
+        print(timer.start)
+        
+        self.timerList.append(timer)
+        
+        let timerIndexPath = IndexPath(row: self.timerList.count - 1, section: 0)
+        
+        // self.tableView.beginUpdates()
+        // self.tableView.insertRows(at: [timerIndexPath], with: .top)
+        // self.tableView.endUpdates()
+    }
+    
     @objc func loadTweets() {
         let myUrl = "https://api.twitter.com/1.1/statuses/home_timeline.json"
         let myParams: [String:Any] = ["count": numberofTweets!, "include_entities": "true"]
         TwitterAPICaller.client?.getDictionariesRequest(url: myUrl, parameters: myParams, success: { (tweets: [NSDictionary]) in
             // print(tweets)
             self.tweetArray.removeAll()
+            self.timerList.removeAll()
             for tweet in tweets {
                 self.tweetArray.append(tweet)
+                
+                
+                let timeString = tweet["created_at"] as! String
+                
+                // let parsedTime = timeString.toDate("ddd MM d HH:mm:ss K yyyy")
+                let parsedTime = timeString.toDate("ccc MMM dd HH:mm:ss xxxx yyyy")
+                // print(parsedTime?.toFormat("dd MMM yyyy 'at' HH:mm:ss"))
+                
+                // Goal: 2021-02-14 13:39:34 +0000
+                
+                let formattedDate = parsedTime?.toFormat("yyyy'-'MM'-'dd' 'HH:mm:ss' 'xxxx") as! String
+                print(formattedDate)
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.locale = Locale(identifier: "en_US")
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+                let date = dateFormatter.date(from: formattedDate)
+                print(date)
+                
+                self.addNewTimer(date!)
+                
             }
             self.tableView.reloadData()
             self.myRefreshControl.endRefreshing()
@@ -171,8 +216,32 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         let myParams = ["count": numberofTweets]
         TwitterAPICaller.client?.getDictionariesRequest(url: myUrl, parameters: myParams, success: { (tweets: [NSDictionary]) in
             self.tweetArray.removeAll()
+            self.timerList.removeAll()
             for tweet in tweets {
                 self.tweetArray.append(tweet)
+                
+                
+                
+                let timeString = tweet["created_at"] as! String
+                
+                // let parsedTime = timeString.toDate("ddd MM d HH:mm:ss K yyyy")
+                let parsedTime = timeString.toDate("ccc MMM dd HH:mm:ss xxxx yyyy")
+                // print(parsedTime?.toFormat("dd MMM yyyy 'at' HH:mm:ss"))
+                
+                // Goal: 2021-02-14 13:39:34 +0000
+                
+                let formattedDate = parsedTime?.toFormat("yyyy'-'MM'-'dd' 'HH:mm:ss' 'xxxx") as! String
+                print(formattedDate)
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.locale = Locale(identifier: "en_US")
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+                let date = dateFormatter.date(from: formattedDate)
+                print(date)
+                
+                self.addNewTimer(date!)
+                
+                
             }
             self.tableView.reloadData()
         }, failure: { (Error) in
@@ -256,6 +325,8 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         cell.handleLabel.text = "@\(user["screen_name"] as! String)"
         cell.handleLabel.addCharacterSpacing(kernValue: 0.2)
         
+        
+        /* DISABLE TO FIXXXXX
         let timeString = tweet["created_at"] as! String
         
         // let parsedTime = timeString.toDate("ddd MM d HH:mm:ss K yyyy")
@@ -269,7 +340,6 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
-        // dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
         let date = dateFormatter.date(from: formattedDate)
         print(date)
@@ -281,7 +351,11 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         let testRelativeTimeComponents = testRelativeTimeStr.components(separatedBy: " ")
         print(testRelativeTimeComponents)
         
-        cell.timeLabel.text = " · \(testRelativeTimeComponents[0])\(testRelativeTimeComponents[1].prefix(1))"
+        
+        // cell.timeLabel.text = " · \(testRelativeTimeComponents[0])\(testRelativeTimeComponents[1].prefix(1))"
+        
+
+        */
         
         
         cell.tweetContent.text = tweetArray[indexPath.row]["text"] as? String
@@ -443,7 +517,32 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         cell.tweetId = tweetArray[indexPath.row]["id"] as! Int
         cell.setRetweeted(tweetArray[indexPath.row]["retweeted"] as! Bool)
         
+        
+        if let cell = cell as? TweetCellTableViewCell {
+            cell.timeSince = timerList[indexPath.row]
+        }
+        
         return cell
+    }
+    
+    @objc func updateTimer() {
+        guard let visibleRowsIndexPaths = tableView.indexPathsForVisibleRows else {
+            return
+        }
+        for indexPath in visibleRowsIndexPaths {
+            if let cell = tweetTableView.cellForRow(at: indexPath) as? TweetCellTableViewCell {
+                cell.updateTime()
+            }
+        }
+    }
+    
+    func createTimer() {
+        if timer == nil {
+            let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats:true)
+            RunLoop.current.add(timer, forMode: .common)
+            timer.tolerance = 0.1
+            self.timer = timer
+        }
     }
     
     func getGestureRecognizer() -> UITapGestureRecognizer {

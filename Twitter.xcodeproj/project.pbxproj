@@ -20,6 +20,7 @@
 		D486245F25D7D5DA00733237 /* HelveticaNeueLTPro-75Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D486245D25D7D5DA00733237 /* HelveticaNeueLTPro-75Bold.otf */; };
 		D486246225D808F300733237 /* highlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D486246125D808F300733237 /* highlightButton.swift */; };
 		D486252E25D96A2700733237 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D486252D25D96A2500733237 /* PaddingLabel.swift */; };
+		D486253125D96E3D00733237 /* TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = D486253025D96E3D00733237 /* TimeSince.swift */; };
 		D48B0FAF25D25C78006111DB /* LoginViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48B0FAE25D25C78006111DB /* LoginViewViewController.swift */; };
 		D4C9D14125D48B5D00CDDF60 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C9D14025D48B5D00CDDF60 /* TweetViewController.swift */; };
 		D4E07EE525D74DA5003CD7DA /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07EE425D74DA5003CD7DA /* MediaViewController.swift */; };
@@ -43,6 +44,7 @@
 		D486245D25D7D5DA00733237 /* HelveticaNeueLTPro-75Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HelveticaNeueLTPro-75Bold.otf"; path = "../../../Desktop/Twitter Tweet template - Helvetica/Fonts/HelveticaNeueLTPro-75Bold.otf"; sourceTree = "<group>"; };
 		D486246125D808F300733237 /* highlightButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = highlightButton.swift; sourceTree = "<group>"; };
 		D486252D25D96A2500733237 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		D486253025D96E3D00733237 /* TimeSince.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeSince.swift; path = ../../../Desktop/myOwnTimer/myOwnTimer/TimeSince.swift; sourceTree = "<group>"; };
 		D48B0FAE25D25C78006111DB /* LoginViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewViewController.swift; sourceTree = "<group>"; };
 		D4C9D14025D48B5D00CDDF60 /* TweetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
 		D4E07EE425D74DA5003CD7DA /* MediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				D4809F4625D26226002030EA /* HomeTableViewController.swift */,
 				D486246125D808F300733237 /* highlightButton.swift */,
 				D4E07EE425D74DA5003CD7DA /* MediaViewController.swift */,
+				D486253025D96E3D00733237 /* TimeSince.swift */,
 				D4809F4925D2681C002030EA /* TweetCellTableViewCell.swift */,
 				D4C9D14025D48B5D00CDDF60 /* TweetViewController.swift */,
 				D486245C25D7D5DA00733237 /* HelveticaNeueLTPro-55Roman.otf */,
@@ -235,6 +238,7 @@
 				D4809F4725D26226002030EA /* HomeTableViewController.swift in Sources */,
 				6EBCF54421E047A500451C03 /* TwitterAPICaller.swift in Sources */,
 				D4C9D14125D48B5D00CDDF60 /* TweetViewController.swift in Sources */,
+				D486253125D96E3D00733237 /* TimeSince.swift in Sources */,
 				D4E07EE525D74DA5003CD7DA /* MediaViewController.swift in Sources */,
 				6EBCF52621DF07FC00451C03 /* AppDelegate.swift in Sources */,
 				D40AD4E625D5247300A295F2 /* ProfileViewController.swift in Sources */,
