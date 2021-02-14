@@ -27,6 +27,8 @@ class TweetCellTableViewCell: UITableViewCell {
     @IBOutlet weak var mediaStack: UIStackView!
     @IBOutlet weak var cellView: UIView!
     @IBOutlet var stupidConsraint: NSLayoutConstraint!
+    @IBOutlet weak var retweetLabel: PaddingLabel!
+    
     
     var timeSince: TimeSince? {
         didSet {
@@ -34,6 +36,11 @@ class TweetCellTableViewCell: UITableViewCell {
             // setState()
             updateTime()
         }
+    }
+    
+    func turnOffRetweetLabel() {
+        let squishLabelConstraint = NSLayoutConstraint(item: retweetLabel!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 0)
+        self.addConstraint(squishLabelConstraint)
     }
     
     func updateTime() {

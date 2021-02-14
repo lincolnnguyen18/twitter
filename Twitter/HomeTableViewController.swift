@@ -273,7 +273,7 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         // #warning Incomplete implementation, return the number of rows
         return tweetArray.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath) as! TweetCellTableViewCell
         
@@ -321,6 +321,10 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         cell.userNameLabel.text = user["name"] as? String
         // cell.userNameLabel.addCharacterSpacing(kernValue: 0.2)
         
+        if tweet["retweeted_status"] == nil {
+            // cell.retweetLabel
+            cell.turnOffRetweetLabel()
+        }
         
         cell.handleLabel.text = "@\(user["screen_name"] as! String)"
         cell.handleLabel.addCharacterSpacing(kernValue: 0.2)

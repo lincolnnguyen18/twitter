@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "retweet-icon.png",
+      "filename" : "retweet.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "retweet-icon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "retweet-icon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
