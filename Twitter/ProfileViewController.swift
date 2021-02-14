@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DateToolsSwift
 
 class ProfileViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
@@ -15,6 +16,10 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var tweetsLabel: UILabel!
+    @IBOutlet weak var bannerImage: UIImageView!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var joinDateLabel: UILabel!
+    @IBOutlet weak var screenNameLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,25 +27,47 @@ class ProfileViewController: UIViewController {
         let myUrl = "https://api.twitter.com/1.1/account/verify_credentials.json"
         let myParams: [String:Any] = ["include_entities":false]
         TwitterAPICaller.client?.getDictionaryRequest(url: myUrl, parameters: myParams, success: { (user) in
-            // print(user)
-            let newUrl = self.replaceMatches(for: "_normal\\.", inString: user["profile_image_url_https"] as! String, withString: "\\.")
+            print(user)
+            var newUrl = self.replaceMatches(for: "_normal\\.", inString: user["profile_image_url_https"] as! String, withString: "\\.")
             // print(newUrl!)
-            let imageUrl = URL(string: (newUrl)!)
-            let data = try? Data(contentsOf: imageUrl!)
+            var imageUrl = URL(string: (newUrl)!)
+            var data = try? Data(contentsOf: imageUrl!)
             
             if let imageData = data {
                 self.profileImageView.image = UIImage(data: imageData)
             }
             self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
             self.profileImageView.layer.masksToBounds = true
-            // self.profileImageView.layer.borderWidth = 2
-            // self.profileImageView.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            self.profileImageView.layer.borderWidth = 3.5
+            self.profileImageView.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            
+            
+            newUrl = self.replaceMatches(for: "_normal\\.", inString: user["profile_banner_url"] as! String, withString: "\\.")
+            // print(newUrl2!)
+            imageUrl = URL(string: (newUrl)!)
+            data = try? Data(contentsOf: imageUrl!)
+            
+            if let imageData = data {
+                self.bannerImage.image = UIImage(data: imageData)
+            }
+            // self.bannerImage.layer.cornerRadius = self.profileImageView.frame.size.width / 2
+            // self.profileImageView.layer.masksToBounds = true
+            
             
             self.nameLabel.text = user["name"] as? String
+            self.screenNameLabel.text = user["screen_name"] as? String
             self.descriptionLabel.text = user["description"] as? String
             // self.followingLabel.text = "\(user["friends_count"] as? Int ?? 0) Following"
             // self.followersLabel.text = "\(user["followers_count"] as? Int ?? 0) Followers"
             // self.tweetsLabel.text = "\(user["statuses_count"] as? Int ?? 0) Tweets"
+            self.locationLabel.text = user["location"] as? String
+            
+            let rawDate = user["created_at"] as! String
+            self.joinDateLabel.text = rawDate
+            let parsedTime = rawDate.toDate("ccc MMM dd HH:mm:ss xxxx yyyy")
+            // print(parsedTime)
+            print(parsedTime?.toFormat("dd MMM yyyy 'at' HH:mm"))
+            
             self.followersLabel.attributedText = NSMutableAttributedString()
                 .bold("\(user["followers_count"] as? Int ?? 0) ")
                 .greyHighlight("Followers")
@@ -48,7 +75,7 @@ class ProfileViewController: UIViewController {
                 .bold("\(user["friends_count"] as? Int ?? 0) ")
                 .greyHighlight("Following")
             self.tweetsLabel.attributedText = NSMutableAttributedString()
-                .bold("\(user["followers_count"] as? Int ?? 0) ")
+                .bold("\(user["statuses_count"] as? Int ?? 0) ")
                 .greyHighlight("Tweets")
         }, failure: { (Error) in
             print("Error in getting user: \(Error)")
@@ -83,7 +110,7 @@ class ProfileViewController: UIViewController {
 }
 
 extension NSMutableAttributedString {
-    var fontSize:CGFloat { return 17 }
+    var fontSize:CGFloat { return 15 }
     var boldFont:UIFont { return UIFont.boldSystemFont(ofSize: fontSize) }
     var normalFont:UIFont { return UIFont.systemFont(ofSize: fontSize)}
     

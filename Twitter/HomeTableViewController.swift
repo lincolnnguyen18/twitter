@@ -78,6 +78,7 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         //     sender.backgroundColor = #colorLiteral(red: 0.1137254902, green: 0.631372549, blue: 0.9490196078, alpha: 1)
         // }
         print("sucess!")
+        performSegue(withIdentifier: "toTweet", sender: self)
     }
     
     func lightboxController(_ controller: LightboxController, didMoveToPage page: Int) {
@@ -259,15 +260,28 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         
         // let parsedTime = timeString.toDate("ddd MM d HH:mm:ss K yyyy")
         let parsedTime = timeString.toDate("ccc MMM dd HH:mm:ss xxxx yyyy")
-        print(parsedTime?.toFormat("dd MMM yyyy 'at' HH:mm"))
+        // print(parsedTime?.toFormat("dd MMM yyyy 'at' HH:mm:ss"))
+        
+        // Goal: 2021-02-14 13:39:34 +0000
+        
+        let formattedDate = parsedTime?.toFormat("yyyy'-'MM'-'dd' 'HH:mm:ss' 'xxxx") as! String
+        print(formattedDate)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US")
+        // dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        let date = dateFormatter.date(from: formattedDate)
+        print(date)
+        
         // print(parsedTime - Date()).toRelative()
-        let testRelativeTime = (parsedTime?.toRelative(since: DateInRegion(), style: RelativeFormatter.defaultStyle(), locale: Locales.english))
-        print(testRelativeTime)
+        let testRelativeTime = (parsedTime?.toRelative(since: DateInRegion(), style: RelativeFormatter.Style.init(flavours: [RelativeFormatter.Flavour.longTime], gradation: RelativeFormatter.Gradation.canonical(), allowedUnits: [.now, .second, .minute]), locale: Locales.english))
+        print(testRelativeTime!)
         let testRelativeTimeStr = testRelativeTime as! String
         let testRelativeTimeComponents = testRelativeTimeStr.components(separatedBy: " ")
         print(testRelativeTimeComponents)
         
-        cell.timeLabel.text = " · \(testRelativeTime!)"
+        cell.timeLabel.text = " · \(testRelativeTimeComponents[0])\(testRelativeTimeComponents[1].prefix(1))"
         
         
         cell.tweetContent.text = tweetArray[indexPath.row]["text"] as? String
@@ -290,6 +304,10 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         // cell.tweetContent.attributedText = attrString
         //
         var media1: UIImage?, media2: UIImage?, media3: UIImage?, media4: UIImage?
+        
+        // if media1 == nil && media2 == nil && media3 == nil && media4 == nil {
+        //     cell.mediaStack.
+        // }
         
         
         // let entities = tweetArray[indexPath.row]["entities"] as? NSDictionary
@@ -417,6 +435,8 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
             cell.profileImageView.image = UIImage(data: imageData)
             cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.size.width / 2
             cell.profileImageView.layer.masksToBounds = true
+            cell.profileImageView.layer.borderColor = #colorLiteral(red: 0.8729855169, green: 0.8729855169, blue: 0.8729855169, alpha: 1)
+            cell.profileImageView.layer.borderWidth = 0.5
         }
         
         cell.setFavorite(tweetArray[indexPath.row]["favorited"] as! Bool)

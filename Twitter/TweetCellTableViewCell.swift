@@ -26,17 +26,35 @@ class TweetCellTableViewCell: UITableViewCell {
     @IBOutlet var media4: UIImageView!
     @IBOutlet weak var mediaStack: UIStackView!
     @IBOutlet weak var cellView: UIView!
+    @IBOutlet var stupidConsraint: NSLayoutConstraint!
     
     func setMedia(_ image1: UIImage?, _ image2: UIImage?, _ image3: UIImage?, _ image4: UIImage?) {
-        // if (image1 == nil && image2 == nil && image3 == nil && image4 ==  nil) {
-        //     // self.mediaStack.removeFromSuperview()
-        //     // self.mediaStack.isHidden = true
-        // } else {
+        
+        // let stupidConstraintCopy = stupidConsraint as! NSLayoutConstraint
+        // let squishStack = NSLayoutConstraint(item: mediaStack!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 0)
+        
+        if (image1 == nil && image2 == nil && image3 == nil && image4 ==  nil) {
+            // self.mediaStack.removeFromSuperview()
+            // self.mediaStack.isHidden = true
+            // stupidConsraint.isActive = false
+            // self.removeConstraint(stupidConsraint)
+            stupidConsraint.constant = -11
+            // self.addConstraint(squishStack)
+            
+        } else {
+            // self.addSubview(self.mediaStack)
+            // self.mediaStack.isHidden = false
+            // stupidConsraint.isActive = true
+            // self.addConstraint(stupidConsraint)
+            stupidConsraint.constant = 11
+            // self.removeConstraint(squishStack)
+            
+        }
         if image1 != nil {
             self.media1.image = image1
             self.media1.layer.cornerRadius = self.media1.frame.size.width / 15
             self.media1.layer.masksToBounds = true
-            self.media1.layer.borderWidth = 1.2
+            self.media1.layer.borderWidth = 1
             self.media1.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             self.mediaStack.addSubview(media1)
             self.mediaStack.addArrangedSubview(media1)
@@ -50,7 +68,7 @@ class TweetCellTableViewCell: UITableViewCell {
             self.media2.image = image2
             self.media2.layer.cornerRadius = self.media2.frame.size.width / 15
             self.media2.layer.masksToBounds = true
-            self.media2.layer.borderWidth = 1.2
+            self.media2.layer.borderWidth = 1
             self.media2.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             self.mediaStack.addSubview(media2)
             self.mediaStack.addArrangedSubview(media2)
@@ -64,7 +82,7 @@ class TweetCellTableViewCell: UITableViewCell {
             self.media3.image = image3
             self.media3.layer.cornerRadius = self.media3.frame.size.width / 15
             self.media3.layer.masksToBounds = true
-            self.media3.layer.borderWidth = 1.2
+            self.media3.layer.borderWidth = 1
             self.media3.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             self.mediaStack.addSubview(media3)
             self.mediaStack.addArrangedSubview(media3)
@@ -78,7 +96,7 @@ class TweetCellTableViewCell: UITableViewCell {
             self.media4.image = image4
             self.media4.layer.cornerRadius = self.media4.frame.size.width / 15
             self.media4.layer.masksToBounds = true
-            self.media4.layer.borderWidth = 1.2
+            self.media4.layer.borderWidth = 1
             self.media4.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             self.mediaStack.addSubview(media4)
             self.mediaStack.addArrangedSubview(media4)
