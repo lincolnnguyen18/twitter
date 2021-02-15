@@ -18,7 +18,7 @@ extension UIView {
         
         
         self.isHidden = false
-        UIView.animate(withDuration: duration!, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, animations: {
+        UIView.animate(withDuration: duration!, delay: 0.3, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, animations: {
             self.alpha = 1
             // self.frame.size.width = oldWidth
             
