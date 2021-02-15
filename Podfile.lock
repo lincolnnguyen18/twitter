@@ -26,6 +26,7 @@ PODS:
   - Lightbox (2.5.0):
     - Imaginary (~> 5.0.0)
   - SwiftDate (6.3.1)
+  - SwiftyGif (5.4.0)
 
 DEPENDENCIES:
   - AFNetworking
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - DateToolsSwift
   - Lightbox
   - SwiftDate
+  - SwiftyGif
 
 SPEC REPOS:
   trunk:
@@ -46,6 +48,7 @@ SPEC REPOS:
     - Imaginary
     - Lightbox
     - SwiftDate
+    - SwiftyGif
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
@@ -57,7 +60,8 @@ SPEC CHECKSUMS:
   Imaginary: cf5e3a7dd6ab1dcbd47ba8ce5edf2307c4e99eb3
   Lightbox: cc3d5124f024fa8197fd23f913160db1c61a1852
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
+  SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
 
-PODFILE CHECKSUM: c107ce00d8fd2d59fa2b82bbc471af414e24c90d
+PODFILE CHECKSUM: 74885b7b6a8253a336535a403d4073612edfa878
 
 COCOAPODS: 1.10.1

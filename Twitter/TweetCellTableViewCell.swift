@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyGif
 
 class TweetCellTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
@@ -15,7 +16,18 @@ class TweetCellTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var tweetContent: UILabel!
     @IBOutlet weak var favButton: UIButton!
-    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favedButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton! {
+        didSet {
+            retweetButton.tintColor = #colorLiteral(red: 0.3568627451, green: 0.4392156863, blue: 0.5137254902, alpha: 1)
+        }
+    }
+    @IBOutlet weak var retweetGreen: UIButton! {
+        didSet {
+            retweetGreen.tintColor = #colorLiteral(red: 0.09019607843, green: 0.7490196078, blue: 0.3882352941, alpha: 1)
+        }
+    }
+    
     @IBOutlet var media1: UIImageView! {
         didSet {
             media1.isUserInteractionEnabled = true
@@ -162,6 +174,43 @@ class TweetCellTableViewCell: UITableViewCell {
         if (toBeFavorited) {
             TwitterAPICaller.client?.favoriteTweet(tweetId: tweetId, success: {
                 self.setFavorite(true)
+                
+                do {
+                    print("working?")
+                    self.favButton.isHidden = true
+                    self.favedButton.isHidden = false
+                    let gif = try UIImage(gifName: "favoriteAnimate.gif")
+                    
+                    var testView: UIImageView = UIImageView()
+                    // testView.backgroundColor = UIColor.clear
+                    // testView.isOpaque = false
+                    // testView.layer.zPosition -= 1
+                    // self.superview!.superview!.sendSubviewToBack(self.superview!)
+                    
+                    testView.frame = CGRect(x: -7, y: -7, width: self.favedButton.frame.width + 14, height: self.favedButton.frame.height + 14)
+                    
+                    // testView.cro
+                    
+                    self.favedButton.addSubview(testView)
+                    
+                    self.bringSubviewToFront(self.mediaStack)
+                    // self.mediaStack.layer.
+                    self.sendSubviewToBack(self.favedButton)
+                    
+                    testView.setGifImage(gif, loopCount: 1)
+                    self.superview!.layoutIfNeeded()
+                    
+                    // self.favedButton.imageView?.setGifImage(gif, loopCount: 1)
+                    // self.favedButton.setImage(gif, for: <#T##UIControl.State#>)
+                    // self.heart.removeConstraint(heartWidth)
+                    // self.heart.addConstraint(NSLayoutConstraint(item: self.heart!, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 50))
+                    // heartWidth.constant = 53
+                    // isFavorited = true
+                } catch {
+                    print(error)
+                }
+                
+                
             }, failure: { (Error) in
                 print("Favorite did not succeed: \(Error)")
             })
@@ -174,23 +223,47 @@ class TweetCellTableViewCell: UITableViewCell {
         }
     }
     
+    var isRetweeted = false
+    
     @IBAction func retweet(_ sender: Any) {
         TwitterAPICaller.client?.retweet(tweetId: tweetId, success: {
             self.setRetweeted(true)
+            
+            UIView.animate(withDuration: 0.03, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                // self.heartWidth.constant = 100
+                // self.view.layoutIfNeeded()
+                self.retweetGreen.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                // self.greenWidth.constant = 30
+                self.superview!.layoutIfNeeded()
+            }) { (finished) in
+                UIView.animate(withDuration: 0.1, delay: 0.1, animations: {
+                    // self.heart.transform = CGAffineTransform.identity
+                    self.retweetGreen.transform = CGAffineTransform(scaleX: 1, y: 1)
+                    self.superview!.layoutIfNeeded()
+                })
+            }
+            
+            self.isRetweeted = true
         }, failure: { (Error) in
             print("Error in retweeting: \(Error)")
         })
     }
     
-    
-    
     func setRetweeted(_ isRetweeted:Bool) {
         if (isRetweeted) {
             retweetButton.setImage(UIImage(named: "retweeted2"), for: UIControl.State.normal)
             retweetButton.isEnabled = false
+            self.retweetButton.isHidden = true
+            self.retweetGreen.isHidden = false
+            retweetGreen.setImage(UIImage(named: "retweeted2"), for: .normal)
+            self.isRetweeted = true
         } else {
             retweetButton.setImage(UIImage(named: "retweet2"), for: UIControl.State.normal)
             retweetButton.isEnabled = true
+            self.retweetButton.isHidden = false
+            self.retweetGreen.isHidden = true
+            retweetButton.setImage(UIImage(named: "retweet2"), for: .normal)
+            self.isRetweeted = false
         }
     }
     
@@ -202,9 +275,13 @@ class TweetCellTableViewCell: UITableViewCell {
         favorited = isFavorited
         if (favorited) {
             favButton.setImage(UIImage(named: "favorited2"), for: UIControl.State.normal)
+            self.favButton.isHidden = true
+            self.favedButton.isHidden = false
         }
         else {
             favButton.setImage(UIImage(named: "favorite2"), for: UIControl.State.normal)
+            self.favButton.isHidden = false
+            self.favedButton.isHidden = true
         }
     }
     

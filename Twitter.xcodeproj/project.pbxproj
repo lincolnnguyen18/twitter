@@ -22,6 +22,7 @@
 		D486252E25D96A2700733237 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D486252D25D96A2500733237 /* PaddingLabel.swift */; };
 		D486253125D96E3D00733237 /* TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = D486253025D96E3D00733237 /* TimeSince.swift */; };
 		D48B0FAF25D25C78006111DB /* LoginViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48B0FAE25D25C78006111DB /* LoginViewViewController.swift */; };
+		D4A5D72E25DB137300D5F119 /* favoriteAnimate.gif in Resources */ = {isa = PBXBuildFile; fileRef = D4A5D72D25DB137200D5F119 /* favoriteAnimate.gif */; };
 		D4C9D14125D48B5D00CDDF60 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C9D14025D48B5D00CDDF60 /* TweetViewController.swift */; };
 		D4E07EE525D74DA5003CD7DA /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07EE425D74DA5003CD7DA /* MediaViewController.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		D486252D25D96A2500733237 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		D486253025D96E3D00733237 /* TimeSince.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeSince.swift; path = ../../../Desktop/myOwnTimer/myOwnTimer/TimeSince.swift; sourceTree = "<group>"; };
 		D48B0FAE25D25C78006111DB /* LoginViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewViewController.swift; sourceTree = "<group>"; };
+		D4A5D72D25DB137200D5F119 /* favoriteAnimate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = favoriteAnimate.gif; path = ../../newTiwtterIcons/favoriteAnimate.gif; sourceTree = "<group>"; };
 		D4C9D14025D48B5D00CDDF60 /* TweetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
 		D4E07EE425D74DA5003CD7DA /* MediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +100,7 @@
 				6EBCF54321E047A500451C03 /* TwitterAPICaller.swift */,
 				6EBCF52521DF07FC00451C03 /* AppDelegate.swift */,
 				37D29B8521F90E3400984A88 /* Assets.xcassets */,
+				D4A5D72D25DB137200D5F119 /* favoriteAnimate.gif */,
 				6EBCF53121DF07FE00451C03 /* Info.plist */,
 				D48B0FAE25D25C78006111DB /* LoginViewViewController.swift */,
 				D4809F4625D26226002030EA /* HomeTableViewController.swift */,
@@ -182,6 +185,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4A5D72E25DB137300D5F119 /* favoriteAnimate.gif in Resources */,
 				D486245E25D7D5DA00733237 /* HelveticaNeueLTPro-55Roman.otf in Resources */,
 				D486245F25D7D5DA00733237 /* HelveticaNeueLTPro-75Bold.otf in Resources */,
 				6EBCF54E21E71F9400451C03 /* Launch Screen.storyboard in Resources */,

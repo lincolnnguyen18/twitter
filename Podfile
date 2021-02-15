@@ -11,4 +11,5 @@ target 'Twitter' do
   pod 'Lightbox'
   pod 'SwiftDate'
   pod 'DateToolsSwift'
+  pod 'SwiftyGif'
 end
