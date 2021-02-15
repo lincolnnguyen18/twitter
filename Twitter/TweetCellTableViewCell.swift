@@ -93,7 +93,7 @@ class TweetCellTableViewCell: UITableViewCell {
             self.media1.image = image1
             self.media1.layer.cornerRadius = self.media1.frame.size.width / 15
             self.media1.layer.masksToBounds = true
-            self.media1.layer.borderWidth = 1
+            self.media1.layer.borderWidth = 0.5
             self.media1.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             self.mediaStack.addSubview(media1)
             self.mediaStack.addArrangedSubview(media1)
@@ -107,7 +107,7 @@ class TweetCellTableViewCell: UITableViewCell {
             self.media2.image = image2
             self.media2.layer.cornerRadius = self.media2.frame.size.width / 15
             self.media2.layer.masksToBounds = true
-            self.media2.layer.borderWidth = 1
+            self.media2.layer.borderWidth = 0.5
             self.media2.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             self.mediaStack.addSubview(media2)
             self.mediaStack.addArrangedSubview(media2)
@@ -121,7 +121,7 @@ class TweetCellTableViewCell: UITableViewCell {
             self.media3.image = image3
             self.media3.layer.cornerRadius = self.media3.frame.size.width / 15
             self.media3.layer.masksToBounds = true
-            self.media3.layer.borderWidth = 1
+            self.media3.layer.borderWidth = 0.5
             self.media3.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             self.mediaStack.addSubview(media3)
             self.mediaStack.addArrangedSubview(media3)
@@ -135,7 +135,7 @@ class TweetCellTableViewCell: UITableViewCell {
             self.media4.image = image4
             self.media4.layer.cornerRadius = self.media4.frame.size.width / 15
             self.media4.layer.masksToBounds = true
-            self.media4.layer.borderWidth = 1
+            self.media4.layer.borderWidth = 0.5
             self.media4.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             self.mediaStack.addSubview(media4)
             self.mediaStack.addArrangedSubview(media4)
@@ -182,12 +182,14 @@ class TweetCellTableViewCell: UITableViewCell {
         })
     }
     
+    
+    
     func setRetweeted(_ isRetweeted:Bool) {
         if (isRetweeted) {
-            retweetButton.setImage(UIImage(named: "retweet-icon-green"), for: UIControl.State.normal)
+            retweetButton.setImage(UIImage(named: "retweeted2"), for: UIControl.State.normal)
             retweetButton.isEnabled = false
         } else {
-            retweetButton.setImage(UIImage(named: "retweet-icon"), for: UIControl.State.normal)
+            retweetButton.setImage(UIImage(named: "retweet2"), for: UIControl.State.normal)
             retweetButton.isEnabled = true
         }
     }
@@ -199,16 +201,17 @@ class TweetCellTableViewCell: UITableViewCell {
     func setFavorite(_ isFavorited:Bool) {
         favorited = isFavorited
         if (favorited) {
-            favButton.setImage(UIImage(named: "favor-icon-red"), for: UIControl.State.normal)
+            favButton.setImage(UIImage(named: "favorited2"), for: UIControl.State.normal)
         }
         else {
-            favButton.setImage(UIImage(named: "favor-icon"), for: UIControl.State.normal)
+            favButton.setImage(UIImage(named: "favorite2"), for: UIControl.State.normal)
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.selectionStyle = UITableViewCell.SelectionStyle.none
     }
 
     // override func setSelected(_ selected: Bool, animated: Bool) {

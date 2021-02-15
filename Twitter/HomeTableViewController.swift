@@ -34,11 +34,12 @@ extension UIWindow {
 var btn = highlightButton(type: .custom)
 func floatingButton() {
     let circleLocation = 75
-    let circleWidth = 55
+    let circleWidth = 57
     // btn.frame = CGRect(x: locationX, y: locationY, width: circleWidth, height: circleWidth)
-    btn.frame = CGRect(x: Int(UIApplication.shared.keyWindow!.bounds.width) - circleLocation, y: Int(UIApplication.shared.keyWindow!.bounds.height) - circleLocation - 49, width: circleWidth, height: circleWidth)
+    btn.frame = CGRect(x: Int(UIApplication.shared.keyWindow!.bounds.width) - circleLocation, y: Int(UIApplication.shared.keyWindow!.bounds.height) - circleLocation - 45, width: circleWidth, height: circleWidth)
     // btn.setTitle("All Defects", for: .normal)
     btn.setImage(UIImage(named: "compose"), for: UIControl.State.normal)
+    btn.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     
     btn.backgroundColor = #colorLiteral(red: 0.1137254902, green: 0.631372549, blue: 0.9490196078, alpha: 1)
     btn.clipsToBounds = true
@@ -47,10 +48,10 @@ func floatingButton() {
     // btn.layer.borderWidth = 1.0
     btn.layer.masksToBounds = false
     btn.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    btn.layer.shadowOffset = CGSize(width: 20, height: 20)
+    btn.layer.shadowOffset = CGSize(width: 12, height: 12)
     // btn.layer.shadowOffset = .zero
-    btn.layer.shadowOpacity = 0.8
-    btn.layer.shadowRadius = CGFloat(circleWidth / 2)
+    btn.layer.shadowOpacity = 1
+    btn.layer.shadowRadius = CGFloat(circleWidth / 5)
     // btn.layer.shadowRadius = 20
     // btn.layer.shadowPath = UIBezierPath(rect: btn.bounds).cgPath
     btn.layer.shadowPath = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: btn.frame.width - 20, height: btn.frame.height - 20)).cgPath
@@ -64,6 +65,12 @@ func floatingButton() {
 }
 
 class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxControllerPageDelegate, LightboxControllerDismissalDelegate {
+    
+    // override func viewWillDisappear(_ animated: Bool) {
+    //     super.viewWillAppear(animated)
+    //     btn.removeFromSuperview()
+    // }
+    
     // @IBOutlet weak var floatingButton: UIButton!
     //
     // override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -118,6 +125,10 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         super.viewDidLoad()
         
         floatingButton()
+        
+        btn.isHidden = true
+        
+        btn.fadeIn()
         
         btn.addTarget(self, action: #selector(buttonTapped(_:)), for: UIControl.Event.touchUpInside)
         
@@ -260,6 +271,8 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         TwitterAPICaller.client?.logout()
         self.dismiss(animated: true, completion: nil)
         UserDefaults.standard.set(false, forKey: "userLoggedIn")
+        // btn.isHidden = true
+        btn.fadeOut()
     }
     
     // MARK: - Table view data source
