@@ -116,7 +116,7 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
     
     func refreshTweets() {
         // disable temporarily ************************************************************************************************
-        // loadTweets()
+        loadTweets()
         print("refresshhhhhahhhhhhh")
     }
     
@@ -133,7 +133,7 @@ class HomeTableViewController: UITableViewController, TweetVCDelegate, LightboxC
         btn.addTarget(self, action: #selector(buttonTapped(_:)), for: UIControl.Event.touchUpInside)
         
         // disable temporarily ************************************************************************************************
-        // loadTweets()
+        loadTweets()
         // self.isModalInPresentation = true
         // self.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
         

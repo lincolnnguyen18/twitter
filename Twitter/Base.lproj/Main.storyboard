@@ -112,7 +112,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@lincoln342000*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xaY-Qo-wMR">
-                                <rect key="frame" x="17.000000000000007" y="279" width="125.66666666666669" height="20"/>
+                                <rect key="frame" x="17" y="279" width="380" height="20"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" name="Twitter gray"/>
                                 <nil key="highlightedColor"/>
@@ -158,14 +158,14 @@
                             <constraint firstItem="oug-a1-etV" firstAttribute="leading" secondItem="Usw-RZ-NgX" secondAttribute="trailing" constant="2" id="B3H-7j-0aJ"/>
                             <constraint firstItem="xaY-Qo-wMR" firstAttribute="leading" secondItem="xiF-b3-IPd" secondAttribute="leading" constant="17" id="D5N-Gw-WM6"/>
                             <constraint firstItem="oug-a1-etV" firstAttribute="top" secondItem="YkH-dx-mBd" secondAttribute="bottom" constant="9" id="H1P-FZ-lw5"/>
-                            <constraint firstItem="pt8-Ap-UdK" firstAttribute="leading" secondItem="oug-a1-etV" secondAttribute="trailing" constant="15.666666666666686" id="Hbt-kh-N6m"/>
+                            <constraint firstItem="pt8-Ap-UdK" firstAttribute="leading" secondItem="oug-a1-etV" secondAttribute="trailing" constant="15.67" id="Hbt-kh-N6m"/>
                             <constraint firstItem="xiF-b3-IPd" firstAttribute="trailing" secondItem="YkH-dx-mBd" secondAttribute="trailing" constant="17" id="Klu-T5-ePK"/>
                             <constraint firstItem="AJO-O6-R2g" firstAttribute="top" secondItem="rC6-zE-B8Q" secondAttribute="bottom" constant="14" id="LL8-c4-hIt"/>
                             <constraint firstItem="fq2-B8-eOw" firstAttribute="firstBaseline" secondItem="tSc-Jt-EM9" secondAttribute="firstBaseline" id="M0S-VT-l8C"/>
                             <constraint firstItem="pt8-Ap-UdK" firstAttribute="top" secondItem="YkH-dx-mBd" secondAttribute="bottom" constant="9" id="Q8a-87-i7p"/>
                             <constraint firstItem="BWa-7E-mRH" firstAttribute="leading" secondItem="fq2-B8-eOw" secondAttribute="trailing" constant="15" id="VdL-6G-lBb"/>
                             <constraint firstItem="rC6-zE-B8Q" firstAttribute="leading" secondItem="xiF-b3-IPd" secondAttribute="leading" constant="17" id="WzW-sB-N2C"/>
-                            <constraint firstItem="xiF-b3-IPd" firstAttribute="trailing" secondItem="xaY-Qo-wMR" secondAttribute="trailing" constant="271.33333333333331" id="ZhZ-Wz-7ix"/>
+                            <constraint firstItem="xiF-b3-IPd" firstAttribute="trailing" secondItem="xaY-Qo-wMR" secondAttribute="trailing" constant="17" id="ZhZ-Wz-7ix"/>
                             <constraint firstItem="fq2-B8-eOw" firstAttribute="leading" secondItem="tSc-Jt-EM9" secondAttribute="trailing" constant="15" id="cri-F4-aqa"/>
                             <constraint firstItem="AJO-O6-R2g" firstAttribute="leading" secondItem="xiF-b3-IPd" secondAttribute="leading" constant="17" id="dUz-iN-jyd"/>
                             <constraint firstItem="RWY-GJ-iIG" firstAttribute="centerX" secondItem="xiF-b3-IPd" secondAttribute="centerX" id="dwv-ps-zPx"/>
@@ -183,7 +183,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="WpM-Nf-SbF">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="WkW-A8-Rnd">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="onLogout:" destination="piy-Bs-Yrk" id="FZ2-wH-uCb"/>
                             </connections>
@@ -195,6 +195,7 @@
                         <outlet property="followersLabel" destination="fq2-B8-eOw" id="xYs-i3-TdU"/>
                         <outlet property="followingLabel" destination="tSc-Jt-EM9" id="wrb-bU-fsT"/>
                         <outlet property="joinDateLabel" destination="ATJ-mx-2my" id="BbC-yz-BA9"/>
+                        <outlet property="locationIcon" destination="Usw-RZ-NgX" id="Bat-7z-uq1"/>
                         <outlet property="locationLabel" destination="oug-a1-etV" id="JjP-5o-mX7"/>
                         <outlet property="nameLabel" destination="AJO-O6-R2g" id="vUQ-JU-NjD"/>
                         <outlet property="profileImageView" destination="rC6-zE-B8Q" id="wVf-gL-NAc"/>
@@ -359,7 +360,7 @@
                                             <color key="textColor" name="Twitter gray"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWw-UR-X5v" userLabel="retweetButton">
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWw-UR-X5v" userLabel="retweetButton">
                                             <rect key="frame" x="71" y="1048" width="37" height="37"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="fWw-UR-X5v" secondAttribute="height" multiplier="1:1" id="64U-03-aAo"/>
@@ -371,7 +372,7 @@
                                                 <action selector="retweet:" destination="yP9-Om-ykn" eventType="touchUpInside" id="iaE-ne-n0d"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NmR-2m-aMh">
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NmR-2m-aMh">
                                             <rect key="frame" x="71" y="1048" width="37" height="37"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="37" id="3wX-lG-SdK"/>
@@ -379,24 +380,28 @@
                                             </constraints>
                                             <inset key="contentEdgeInsets" minX="9" minY="9" maxX="9" maxY="9"/>
                                         </button>
-                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1N-YS-3bm" userLabel="favButton">
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1N-YS-3bm" userLabel="favButton">
                                             <rect key="frame" x="140" y="1048" width="37" height="37"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="37" id="OgP-by-XjQ"/>
+                                                <constraint firstAttribute="width" secondItem="t1N-YS-3bm" secondAttribute="height" multiplier="1:1" id="9wm-Yn-y2j"/>
                                                 <constraint firstAttribute="width" constant="37" id="gdv-0g-3ln"/>
                                             </constraints>
-                                            <inset key="contentEdgeInsets" minX="9" minY="9" maxX="9" maxY="9"/>
+                                            <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
                                             <state key="normal" title="Button"/>
                                             <connections>
                                                 <action selector="favoriteTweet:" destination="yP9-Om-ykn" eventType="touchUpInside" id="9oF-Ae-Yrv"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0iG-Qa-2GN" userLabel="favedButton">
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0iG-Qa-2GN" userLabel="favedButton">
                                             <rect key="frame" x="140" y="1048" width="37" height="37"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="37" id="qqL-zj-12t"/>
                                                 <constraint firstAttribute="width" secondItem="0iG-Qa-2GN" secondAttribute="height" multiplier="1:1" id="s02-i2-oJb"/>
                                             </constraints>
+                                            <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                            <connections>
+                                                <action selector="unfavoriteTweet:" destination="yP9-Om-ykn" eventType="touchUpInside" id="Lhu-fa-gyi"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -436,6 +441,7 @@
                                     <outlet property="favButton" destination="t1N-YS-3bm" id="xI7-6q-zWM"/>
                                     <outlet property="favedButton" destination="0iG-Qa-2GN" id="ffi-yc-qtz"/>
                                     <outlet property="handleLabel" destination="FAG-b7-PJx" id="nlX-iO-TwA"/>
+                                    <outlet property="heartWidth" destination="gdv-0g-3ln" id="h8I-ib-d7P"/>
                                     <outlet property="media1" destination="jEE-ig-Tn8" id="JRE-3M-qt4"/>
                                     <outlet property="media2" destination="Bpr-2k-bRn" id="dQV-sa-ENS"/>
                                     <outlet property="media3" destination="dFb-P6-7py" id="xht-0l-IBi"/>
@@ -458,7 +464,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Home" id="6oZ-35-KTz">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="QHn-iY-UET">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="onLogout:" destination="pFA-z5-q3k" id="ZtP-i3-ziJ"/>
                             </connections>

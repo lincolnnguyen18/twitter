@@ -20,6 +20,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var joinDateLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
+    @IBOutlet weak var locationIcon: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,31 +43,48 @@ class ProfileViewController: UIViewController {
             self.profileImageView.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             
             
-            newUrl = self.replaceMatches(for: "_normal\\.", inString: user["profile_banner_url"] as! String, withString: "\\.")
-            // print(newUrl2!)
-            imageUrl = URL(string: (newUrl)!)
-            data = try? Data(contentsOf: imageUrl!)
-            
-            if let imageData = data {
-                self.bannerImage.image = UIImage(data: imageData)
+            if let bannerUrl = user["profile_banner_url"] as? String {
+                newUrl = self.replaceMatches(for: "_normal\\.", inString: user["profile_banner_url"] as! String, withString: "\\.")
+                // print(newUrl2!)
+                imageUrl = URL(string: (newUrl)!)
+                let data2 = try? Data(contentsOf: imageUrl!)
+                
+                if let imageData = data2 {
+                    self.bannerImage.image = UIImage(data: imageData)
+                }
+                // self.bannerImage.layer.cornerRadius = self.profileImageView.frame.size.width / 2
+                // self.profileImageView.layer.masksToBounds = true
+            } else {
+                self.bannerImage.backgroundColor = #colorLiteral(red: 0.1137254902, green: 0.631372549, blue: 0.9490196078, alpha: 1)
             }
-            // self.bannerImage.layer.cornerRadius = self.profileImageView.frame.size.width / 2
-            // self.profileImageView.layer.masksToBounds = true
             
             
             self.nameLabel.text = user["name"] as? String
-            self.screenNameLabel.text = user["screen_name"] as? String
+            self.screenNameLabel.text = "@\(user["screen_name"]!)"
             self.descriptionLabel.text = user["description"] as? String
             // self.followingLabel.text = "\(user["friends_count"] as? Int ?? 0) Following"
             // self.followersLabel.text = "\(user["followers_count"] as? Int ?? 0) Followers"
             // self.tweetsLabel.text = "\(user["statuses_count"] as? Int ?? 0) Tweets"
-            self.locationLabel.text = user["location"] as? String
+            let locationTest = user["location"] as? String
+            
+            if locationTest!.count > 0 {
+                self.locationLabel.text = locationTest
+            } else {
+                print("workign!")
+                self.locationLabel.isHidden = true
+                self.locationIcon.isHidden = true
+            }
             
             let rawDate = user["created_at"] as! String
-            self.joinDateLabel.text = rawDate
+            
+            
+            
+            // self.joinDateLabel.text = rawDate
             let parsedTime = rawDate.toDate("ccc MMM dd HH:mm:ss xxxx yyyy")
             // print(parsedTime)
-            print(parsedTime?.toFormat("dd MMM yyyy 'at' HH:mm"))
+            let formattedTime = parsedTime?.toFormat("'Joined' MMMM yyyy")
+            print(formattedTime)
+            self.joinDateLabel.text = formattedTime
             
             self.followersLabel.attributedText = NSMutableAttributedString()
                 .bold("\(user["followers_count"] as? Int ?? 0) ")
@@ -86,6 +104,7 @@ class ProfileViewController: UIViewController {
         TwitterAPICaller.client?.logout()
         self.dismiss(animated: true, completion: nil)
         UserDefaults.standard.set(false, forKey: "userLoggedIn")
+        btn.fadeOut()
     }
     
     private func replaceMatches(for pattern: String, inString string: String, withString replacementString: String) -> String? {

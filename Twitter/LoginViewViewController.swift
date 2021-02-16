@@ -71,6 +71,7 @@ class LoginViewViewController: UIViewController {
             // })
             btn.fadeIn()
         }
+        btn.fadeOut()
     }
     
     @IBAction func onLoginButton(_ sender: Any) {
