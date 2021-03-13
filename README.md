@@ -24,6 +24,10 @@ Here's a walkthrough of implemented user stories:
 
 <img src='http://g.recordit.co/XMaI91cAIp.gif' />
 
+Here's a walkthrough of implemented bonus user stories:
+
+<img src='http://g.recordit.co/N3sqpi1amI.gif' />
+
 # Project 3 - *Twitter*
 
 **Twitter** is a basic twitter app to read your tweets.
