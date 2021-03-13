@@ -26,7 +26,7 @@ Here's a walkthrough of implemented user stories:
 
 Here's a walkthrough of implemented bonus user stories:
 
-<img src='http://g.recordit.co/N3sqpi1amI.gif' />
+https://recordit.co/BNIBJjcbYw
 
 # Project 3 - *Twitter*
 
